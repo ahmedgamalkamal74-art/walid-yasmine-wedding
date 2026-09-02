@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Walid & Yasmin | Wedding Invitation</title>
 
@@ -14,481 +14,500 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="locked">
 
-  <!-- =========================
-       OPENING ENVELOPE
-  ========================== -->
+<!-- =====================================================
+     QURAN INTRO
+===================================================== -->
 
-  <section class="opening" id="opening">
+<div id="quranIntro" class="quran-intro">
 
-    <div class="quran">
-      <p class="arabic">
-        وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ
-        أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم
-        مَّوَدَّةً وَرَحْمَةً
-      </p>
+  <div class="quran-content">
 
-      <span>
-        “And He placed between you affection and mercy.”
-      </span>
+    <div class="quran-line"></div>
+
+    <p class="quran-text">
+      ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ
+      أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم
+      مَّوَدَّةً وَرَحْمَةً ﴾
+    </p>
+
+    <p class="quran-reference">
+      سورة الروم · ٢١
+    </p>
+
+    <div class="quran-line"></div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     ENVELOPE
+===================================================== -->
+
+<div id="opening" class="opening">
+
+  <div class="opening-glow"></div>
+
+  <div class="jasmine jasmine-one"></div>
+  <div class="jasmine jasmine-two"></div>
+  <div class="jasmine jasmine-three"></div>
+
+  <button id="openInvitation" class="envelope-wrap" aria-label="Open invitation">
+
+    <div class="envelope">
+
+      <div class="envelope-back"></div>
+
+      <div class="envelope-paper">
+
+        <span class="paper-small">WITH LOVE</span>
+
+        <strong>W & Y</strong>
+
+        <span class="paper-date">
+          13 · 09 · 2026
+        </span>
+
+      </div>
+
+      <div class="envelope-flap"></div>
+
+      <div class="envelope-front"></div>
+
+      <div class="wax-seal">
+        <span>W</span>
+        <i>&</i>
+        <span>Y</span>
+      </div>
+
     </div>
 
-    <div class="envelope-wrapper" id="envelope">
+    <span class="tap-open">
+      TAP TO OPEN
+    </span>
 
-      <div class="envelope">
+  </button>
 
-        <div class="envelope-flap"></div>
+</div>
 
-        <div class="envelope-body">
 
-          <div class="jasmine">
-            <span>✿</span>
-          </div>
+<!-- =====================================================
+     MAIN INVITATION
+===================================================== -->
 
-          <div class="seal">
-            W
-            <span>&</span>
-            Y
-          </div>
+<main id="invitation">
 
-          <div class="envelope-names">
-            Walid & Yasmin
-          </div>
 
-        </div>
+<!-- =====================================================
+     HERO
+===================================================== -->
 
+<section id="hero" class="hero scene">
+
+  <div class="hero-light"></div>
+
+  <div class="chandelier">
+
+    <div class="chandelier-top"></div>
+
+    <div class="chandelier-arm arm-one"></div>
+    <div class="chandelier-arm arm-two"></div>
+    <div class="chandelier-arm arm-three"></div>
+    <div class="chandelier-arm arm-four"></div>
+
+    <div class="chandelier-candle c1"></div>
+    <div class="chandelier-candle c2"></div>
+    <div class="chandelier-candle c3"></div>
+    <div class="chandelier-candle c4"></div>
+
+    <div class="chandelier-center"></div>
+
+  </div>
+
+  <div class="hero-content">
+
+    <p class="eyebrow">
+      WE'RE GETTING MARRIED
+    </p>
+
+    <h1>
+      Walid <span>&</span> Yasmin
+    </h1>
+
+    <div class="hero-divider"></div>
+
+    <p class="hero-date">
+      13 September 2026
+    </p>
+
+    <p class="hero-time">
+      7:00 PM
+    </p>
+
+  </div>
+
+  <a href="#countdown" class="scroll-cue">
+    <span>SCROLL TO DISCOVER</span>
+    <i></i>
+  </a>
+
+</section>
+
+
+<!-- =====================================================
+     COUNTDOWN
+===================================================== -->
+
+<section id="countdown" class="countdown scene">
+
+  <div class="light-string">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="section-inner">
+
+    <p class="eyebrow">
+      OUR DAY IS GETTING CLOSER
+    </p>
+
+    <h2>
+      Counting the moments
+    </h2>
+
+    <div class="countdown-grid">
+
+      <div class="count-box">
+        <strong id="days">00</strong>
+        <span>DAYS</span>
       </div>
 
-      <p class="open-text">
-        Tap to Open
-      </p>
+      <div class="count-box">
+        <strong id="hours">00</strong>
+        <span>HOURS</span>
+      </div>
+
+      <div class="count-box">
+        <strong id="minutes">00</strong>
+        <span>MINUTES</span>
+      </div>
+
+      <div class="count-box">
+        <strong id="seconds">00</strong>
+        <span>SECONDS</span>
+      </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- =========================
-       MAIN WEBSITE
-  ========================== -->
+<!-- =====================================================
+     RINGS
+===================================================== -->
 
-  <main id="website">
+<section id="rings" class="rings scene">
 
-    <!-- HERO -->
+  <div class="ring-light"></div>
 
-    <section class="hero section">
+  <div class="rings-content">
 
-      <div class="chandelier">
-        <div class="chandelier-chain"></div>
+    <p class="eyebrow">
+      A PROMISE FOR A LIFETIME
+    </p>
 
-        <div class="chandelier-light light-1"></div>
-        <div class="chandelier-light light-2"></div>
-        <div class="chandelier-light light-3"></div>
-        <div class="chandelier-light light-4"></div>
-        <div class="chandelier-light light-5"></div>
+    <div class="rings-stage">
 
-        <div class="chandelier-center"></div>
-      </div>
+      <div class="wedding-ring ring-left"></div>
+      <div class="wedding-ring ring-right"></div>
 
-      <div class="hero-content">
+      <div class="ring-glow"></div>
 
-        <p class="eyebrow">
-          WE'RE GETTING MARRIED
-        </p>
+    </div>
 
-        <h1>
-          Walid <span>&</span> Yasmin
-        </h1>
+    <h2>
+      Two Hearts.<br>
+      <span>One Promise.</span>
+    </h2>
 
-        <div class="gold-line"></div>
+  </div>
 
-        <p class="date">
-          13 September 2026
-        </p>
-
-        <p class="time">
-          7:00 PM
-        </p>
-
-      </div>
-
-      <div class="scroll-indicator">
-        <span>Scroll to discover</span>
-        <i></i>
-      </div>
-
-    </section>
+</section>
 
 
-    <!-- COUNTDOWN -->
+<!-- =====================================================
+     WELCOME
+===================================================== -->
 
-    <section class="countdown-section section">
+<section id="welcome" class="welcome scene">
 
-      <div class="section-heading">
-        <span>THE COUNTDOWN</span>
+  <div class="jasmine-corner"></div>
 
-        <h2>
-          Until Our Special Day
-        </h2>
-      </div>
+  <div class="section-inner narrow">
 
-      <div class="countdown" id="countdown">
+    <p class="eyebrow">
+      WITH ALL OUR HEARTS
+    </p>
 
-        <div class="count-box">
-          <strong id="days">00</strong>
-          <span>Days</span>
+    <h2>
+      Welcome to our celebration
+    </h2>
+
+    <p class="body-copy">
+      We are so happy to share this beautiful moment
+      with the people who mean the most to us.
+      Your presence will make our day even more special.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     DETAILS
+===================================================== -->
+
+<section id="details" class="details scene">
+
+  <div class="section-inner">
+
+    <p class="eyebrow">
+      THE ESSENTIALS
+    </p>
+
+    <h2>
+      The Details
+    </h2>
+
+    <div class="details-grid">
+
+      <article class="detail-item">
+        <span class="detail-number">01</span>
+        <small>THE DATE</small>
+        <h3>13 September 2026</h3>
+      </article>
+
+      <article class="detail-item">
+        <span class="detail-number">02</span>
+        <small>THE TIME</small>
+        <h3>7:00 PM</h3>
+        <p>Reception</p>
+      </article>
+
+      <article class="detail-item">
+        <span class="detail-number">03</span>
+        <small>THE VENUE</small>
+        <h3>Lavendola Hall</h3>
+        <p>Tiba Rose Hotel</p>
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     TIMELINE
+===================================================== -->
+
+<section id="timeline" class="timeline scene">
+
+  <div class="section-inner narrow">
+
+    <p class="eyebrow">
+      THE EVENING
+    </p>
+
+    <h2>
+      Order of the Day
+    </h2>
+
+    <div class="timeline-line">
+
+      <div class="timeline-item">
+        <span class="timeline-dot"></span>
+
+        <div>
+          <time>07:00 PM</time>
+          <h3>Welcome</h3>
+          <p>Guests arrive and the celebration begins.</p>
         </div>
+      </div>
 
-        <div class="count-box">
-          <strong id="hours">00</strong>
-          <span>Hours</span>
+      <div class="timeline-item">
+        <span class="timeline-dot"></span>
+
+        <div>
+          <time>08:00 PM</time>
+          <h3>The Celebration</h3>
+          <p>Let the beautiful moments begin.</p>
         </div>
+      </div>
 
-        <div class="count-box">
-          <strong id="minutes">00</strong>
-          <span>Minutes</span>
+      <div class="timeline-item">
+        <span class="timeline-dot"></span>
+
+        <div>
+          <time>09:00 PM</time>
+          <h3>Dinner</h3>
+          <p>A special evening shared together.</p>
         </div>
-
-        <div class="count-box">
-          <strong id="seconds">00</strong>
-          <span>Seconds</span>
-        </div>
-
       </div>
 
-      <!-- Decorative light chain -->
+    </div>
 
-      <div class="light-chain">
+  </div>
 
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+</section>
 
-      </div>
 
-    </section>
+<!-- =====================================================
+     LOCATION
+===================================================== -->
 
+<section id="location" class="location scene">
 
-    <!-- RINGS -->
+  <div class="location-decoration"></div>
 
-    <section class="rings-section section" id="rings">
+  <div class="section-inner narrow">
 
-      <div class="rings-background"></div>
+    <p class="eyebrow">
+      JOIN US THERE
+    </p>
 
-      <div class="rings-content">
+    <h2>
+      Lavendola Hall
+    </h2>
 
-        <p class="eyebrow">
-          TWO HEARTS
-        </p>
+    <p class="location-hotel">
+      Tiba Rose Hotel
+    </p>
 
-        <div class="rings">
+    <div class="location-divider"></div>
 
-          <div class="ring ring-left">
-            <div class="ring-inner"></div>
-          </div>
+    <p class="location-copy">
+      We cannot wait to celebrate this unforgettable
+      evening with you.
+    </p>
 
-          <div class="ring ring-right">
-            <div class="ring-inner"></div>
-          </div>
+    <a
+      class="gold-button"
+      href="https://maps.app.goo.gl/3LwrwyuWPGNcZtKw9?g_st=ac"
+      target="_blank"
+      rel="noopener"
+    >
+      GET DIRECTIONS
+    </a>
 
-        </div>
+  </div>
 
-        <div class="fireworks" id="fireworks"></div>
+</section>
 
-        <h2 class="rings-title">
-          Two Hearts.<br>
-          One Promise.
-        </h2>
 
-      </div>
+<!-- =====================================================
+     MESSAGE
+===================================================== -->
 
-    </section>
+<section id="message" class="message scene">
 
+  <div class="section-inner narrow">
 
-    <!-- WELCOME -->
+    <p class="eyebrow">
+      A LITTLE NOTE
+    </p>
 
-    <section class="welcome section">
+    <h2>
+      Leave a Message
+    </h2>
 
-      <div class="section-heading">
+    <p class="body-copy">
+      Your words will always be part of our memories.
+    </p>
 
-        <span>WELCOME</span>
+    <form id="messageForm">
 
-        <h2>
-          With Love & Joy
-        </h2>
-
-      </div>
-
-      <p class="welcome-text">
-        Together with our families,
-        we invite you to celebrate
-        the beginning of our forever.
-      </p>
-
-      <div class="jasmine-decoration">
-        ✿
-      </div>
-
-    </section>
-
-
-    <!-- WEDDING DETAILS -->
-
-    <section class="details section">
-
-      <div class="section-heading">
-
-        <span>THE WEDDING</span>
-
-        <h2>
-          Details
-        </h2>
-
-      </div>
-
-      <div class="details-grid">
-
-        <div class="detail-card">
-
-          <div class="icon">
-            ♡
-          </div>
-
-          <span>DATE</span>
-
-          <h3>
-            13 September
-          </h3>
-
-          <p>
-            Sunday, 2026
-          </p>
-
-        </div>
-
-
-        <div class="detail-card">
-
-          <div class="icon">
-            ◷
-          </div>
-
-          <span>TIME</span>
-
-          <h3>
-            7:00 PM
-          </h3>
-
-          <p>
-            Reception starts
-          </p>
-
-        </div>
-
-
-        <div class="detail-card">
-
-          <div class="icon">
-            ✦
-          </div>
-
-          <span>VENUE</span>
-
-          <h3>
-            Lavendola Hall
-          </h3>
-
-          <p>
-            Tiba Rose Hotel
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- TIMELINE -->
-
-    <section class="timeline-section section">
-
-      <div class="section-heading">
-
-        <span>THE EVENING</span>
-
-        <h2>
-          Our Timeline
-        </h2>
-
-      </div>
-
-      <div class="timeline">
-
-        <div class="timeline-item">
-
-          <div class="timeline-dot"></div>
-
-          <div>
-            <span>07:00 PM</span>
-            <h3>Welcome</h3>
-            <p>Guests arrive and the celebration begins.</p>
-          </div>
-
-        </div>
-
-
-        <div class="timeline-item">
-
-          <div class="timeline-dot"></div>
-
-          <div>
-            <span>08:00 PM</span>
-            <h3>The Celebration</h3>
-            <p>A beautiful evening filled with love and joy.</p>
-          </div>
-
-        </div>
-
-
-        <div class="timeline-item">
-
-          <div class="timeline-dot"></div>
-
-          <div>
-            <span>09:00 PM</span>
-            <h3>Dinner</h3>
-            <p>Enjoy an unforgettable evening together.</p>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- LOCATION -->
-
-    <section class="location-section section">
-
-      <div class="section-heading">
-
-        <span>JOIN US</span>
-
-        <h2>
-          Find Us
-        </h2>
-
-      </div>
-
-      <div class="location-card">
-
-        <div class="location-icon">
-          ✦
-        </div>
-
-        <h3>
-          Lavendola Hall
-        </h3>
-
-        <p>
-          Tiba Rose Hotel
-        </p>
-
-        <a
-          href="https://maps.app.goo.gl/3LwrwyuWPGNcZtKw9?g_st=ac"
-          target="_blank"
-          class="map-button"
-        >
-          Get Directions
-        </a>
-
-      </div>
-
-    </section>
-
-
-    <!-- MESSAGE -->
-
-    <section class="message-section section">
-
-      <div class="section-heading">
-
-        <span>A LITTLE NOTE</span>
-
-        <h2>
-          Leave Us a Message
-        </h2>
-
-      </div>
-
-      <form class="message-form">
-
+      <div class="field">
         <input
+          id="guestName"
           type="text"
           placeholder="Your Name"
           required
         >
+      </div>
 
+      <div class="field">
         <textarea
-          placeholder="Write your message..."
+          id="guestMessage"
+          placeholder="Your Message"
           rows="5"
           required
         ></textarea>
-
-        <button type="submit">
-          Send with Love
-        </button>
-
-      </form>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-      <div class="footer-jasmine">
-        ✿
       </div>
 
-      <p>
-        With Love
+      <button type="submit" class="gold-button">
+        SEND WITH LOVE
+      </button>
+
+      <p id="formSuccess" class="form-success">
+        Thank you — your message has been received with love.
       </p>
 
-      <h2>
-        Walid & Yasmin
-      </h2>
+    </form>
 
-      <span>
-        13 · 09 · 2026
-      </span>
+  </div>
 
-    </footer>
-
-  </main>
+</section>
 
 
-  <!-- Optional music -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-  <audio id="weddingMusic" loop>
-    <source src="assets/music.mp3" type="audio/mpeg">
-  </audio>
+<footer class="footer">
+
+  <div class="footer-jasmine"></div>
+
+  <p class="footer-names">
+    Walid & Yasmin
+  </p>
+
+  <p class="footer-date">
+    13 · 09 · 2026
+  </p>
+
+  <div class="footer-line"></div>
+
+  <p class="footer-final">
+    Forever starts here.
+  </p>
+
+</footer>
+
+</main>
 
 
-  <script src="script.js"></script>
+<!-- =====================================================
+     MUSIC
+===================================================== -->
+
+<audio id="music" loop preload="auto">
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicToggle" class="music-toggle" aria-label="Toggle music">
+  ♫
+</button>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
