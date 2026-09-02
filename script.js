@@ -1,10 +1,4 @@
 /* =========================================================
-   WALID & YASMIN
-   WEDDING INVITATION
-========================================================= */
-
-
-/* =========================================================
    ELEMENTS
 ========================================================= */
 
@@ -14,18 +8,20 @@ const envelopeButton = document.getElementById("envelopeButton");
 const music = document.getElementById("weddingMusic");
 const musicButton = document.getElementById("musicButton");
 
-const scenes = document.querySelectorAll(".scene");
+const daysEl = document.getElementById("days");
+const hoursEl = document.getElementById("hours");
+const minutesEl = document.getElementById("minutes");
+const secondsEl = document.getElementById("seconds");
 
-const coupleScene = document.querySelector(".couple-scene");
+const invitation = document.getElementById("invitation");
 
 
 /* =========================================================
    WEDDING DATE
 ========================================================= */
 
-const weddingDate = new Date(
-  "2026-09-13T19:00:00+03:00"
-);
+const weddingDate =
+  new Date("2026-09-13T19:00:00+03:00");
 
 
 /* =========================================================
@@ -33,7 +29,7 @@ const weddingDate = new Date(
 ========================================================= */
 
 let invitationOpened = false;
-
+let autoScrollStarted = false;
 
 function openInvitation() {
 
@@ -43,15 +39,24 @@ function openInvitation() {
 
   welcome.classList.add("opening");
 
+  /* Start music after user interaction */
+  if (music) {
 
-  /* Start music */
-  startMusic();
+    music.volume = 0.45;
+
+    music.play()
+      .then(() => {
+        musicButton.classList.add("playing");
+      })
+      .catch(() => {
+        /* Browser may block autoplay */
+      });
+  }
 
 
   /*
-    Give the card time to rise
-    before completely removing
-    the opening screen.
+    Give the card enough time to rise
+    before removing the opening screen.
   */
 
   setTimeout(() => {
@@ -69,27 +74,24 @@ function openInvitation() {
 
 
   /*
-    Start the cinematic automatic
-    scroll after the first scene.
+    Start slow automatic movement
+    after the invitation has appeared.
   */
 
   setTimeout(() => {
 
-    startAutoScroll();
+    if (!autoScrollStarted) {
+      startAutoScroll();
+    }
 
   }, 5200);
-
 }
 
 
-if (envelopeButton) {
-
-  envelopeButton.addEventListener(
-    "click",
-    openInvitation
-  );
-
-}
+envelopeButton.addEventListener(
+  "click",
+  openInvitation
+);
 
 
 /* =========================================================
@@ -99,82 +101,47 @@ if (envelopeButton) {
 let musicPlaying = false;
 
 
-async function startMusic() {
+musicButton.addEventListener("click", () => {
 
   if (!music) return;
 
-  try {
 
-    music.volume = 0.55;
+  if (music.paused) {
 
-    await music.play();
+    music.play()
+      .then(() => {
 
-    musicPlaying = true;
+        musicPlaying = true;
 
-    updateMusicButton();
+        musicButton.classList.add("playing");
 
-  } catch (error) {
+      })
+      .catch(() => {});
+
+  } else {
+
+    music.pause();
 
     musicPlaying = false;
 
-    updateMusicButton();
-
+    musicButton.classList.remove("playing");
   }
 
-}
+});
 
 
-function updateMusicButton() {
+if (music) {
 
-  if (!musicButton) return;
-
-  const icon =
-    musicButton.querySelector(".music-icon");
-
-  if (!icon) return;
-
-  icon.textContent =
-    musicPlaying ? "♫" : "♪";
-
-}
+  music.addEventListener("play", () => {
+    musicPlaying = true;
+    musicButton.classList.add("playing");
+  });
 
 
-if (musicButton) {
-
-  musicButton.addEventListener(
-    "click",
-    async () => {
-
-      if (!music) return;
-
-
-      if (music.paused) {
-
-        try {
-
-          await music.play();
-
-          musicPlaying = true;
-
-        } catch (error) {
-
-          musicPlaying = false;
-
-        }
-
-      } else {
-
-        music.pause();
-
-        musicPlaying = false;
-
-      }
-
-
-      updateMusicButton();
-
-    }
-  );
+  music.addEventListener("pause", () => {
+    musicPlaying = false;
+    musicButton.classList.remove("playing");
+  });
 
 }
 
@@ -188,16 +155,15 @@ function updateCountdown() {
   const now = new Date();
 
   const difference =
-    weddingDate.getTime() -
-    now.getTime();
+    weddingDate.getTime() - now.getTime();
 
 
   if (difference <= 0) {
 
-    setValue("days", "00");
-    setValue("hours", "00");
-    setValue("minutes", "00");
-    setValue("seconds", "00");
+    daysEl.textContent = "00";
+    hoursEl.textContent = "00";
+    minutesEl.textContent = "00";
+    secondsEl.textContent = "00";
 
     return;
   }
@@ -208,9 +174,7 @@ function updateCountdown() {
 
 
   const days =
-    Math.floor(
-      totalSeconds / 86400
-    );
+    Math.floor(totalSeconds / 86400);
 
 
   const hours =
@@ -229,110 +193,82 @@ function updateCountdown() {
     totalSeconds % 60;
 
 
-  setValue(
-    "days",
-    String(days).padStart(2, "0")
-  );
+  daysEl.textContent =
+    String(days).padStart(2, "0");
 
 
-  setValue(
-    "hours",
-    String(hours).padStart(2, "0")
-  );
+  hoursEl.textContent =
+    String(hours).padStart(2, "0");
 
 
-  setValue(
-    "minutes",
-    String(minutes).padStart(2, "0")
-  );
+  minutesEl.textContent =
+    String(minutes).padStart(2, "0");
 
 
-  setValue(
-    "seconds",
-    String(seconds).padStart(2, "0")
-  );
-
-}
-
-
-function setValue(id, value) {
-
-  const element =
-    document.getElementById(id);
-
-  if (element) {
-
-    element.textContent = value;
-
-  }
-
+  secondsEl.textContent =
+    String(seconds).padStart(2, "0");
 }
 
 
 updateCountdown();
 
-setInterval(
-  updateCountdown,
-  1000
-);
+setInterval(updateCountdown, 1000);
 
 
 /* =========================================================
    3D SCROLL ENGINE
 ========================================================= */
 
-let ticking = false;
+const scenes =
+  document.querySelectorAll(".scene");
 
 
 function updateSceneDepth() {
 
+  const viewportHeight =
+    window.innerHeight;
+
+
   const viewportCenter =
-    window.innerHeight / 2;
+    viewportHeight / 2;
 
 
-  scenes.forEach(scene => {
+  scenes.forEach((scene) => {
 
     const rect =
       scene.getBoundingClientRect();
 
 
     const sceneCenter =
-      rect.top +
-      rect.height / 2;
+      rect.top + rect.height / 2;
 
 
     const distance =
-      sceneCenter -
-      viewportCenter;
+      sceneCenter - viewportCenter;
 
+
+    /*
+      Keep movement subtle.
+      The invitation should feel like one
+      continuous physical scene.
+    */
 
     const normalized =
       Math.max(
         -1,
         Math.min(
           1,
-          distance /
-          window.innerHeight
+          distance / viewportHeight
         )
       );
 
 
-    /*
-      Z movement:
-      scenes closer to the center
-      feel deeper and more alive.
-    */
+    const y =
+      normalized * -38;
+
 
     const z =
-      Math.round(
-        -normalized * 70
-      );
-
-
-    const y =
-      Math.round(
-        normalized * 28
-      );
+      Math.abs(normalized) * -70;
 
 
     const rotate =
@@ -343,19 +279,19 @@ function updateSceneDepth() {
       1 -
       Math.max(
         0,
-        Math.abs(normalized) - .75
-      ) * .7;
-
-
-    scene.style.setProperty(
-      "--scene-z",
-      `${z}px`
-    );
+        Math.abs(normalized) - .35
+      ) * .45;
 
 
     scene.style.setProperty(
       "--scene-y",
       `${y}px`
+    );
+
+
+    scene.style.setProperty(
+      "--scene-z",
+      `${z}px`
     );
 
 
@@ -372,121 +308,41 @@ function updateSceneDepth() {
 
   });
 
-
-  ticking = false;
-
 }
 
 
-function requestSceneUpdate() {
-
-  if (!ticking) {
-
-    window.requestAnimationFrame(
-      updateSceneDepth
-    );
-
-    ticking = true;
-
-  }
-
-}
+let scrollTick = false;
 
 
 window.addEventListener(
   "scroll",
-  requestSceneUpdate,
-  {
-    passive: true
-  }
+  () => {
+
+    if (!scrollTick) {
+
+      window.requestAnimationFrame(() => {
+
+        updateSceneDepth();
+
+        scrollTick = false;
+
+      });
+
+      scrollTick = true;
+    }
+
+  },
+  { passive: true }
 );
 
 
 window.addEventListener(
   "resize",
-  requestSceneUpdate
+  updateSceneDepth
 );
 
 
 updateSceneDepth();
-
-
-/* =========================================================
-   COUPLE PARALLAX
-========================================================= */
-
-function updateCoupleParallax() {
-
-  if (!coupleScene) return;
-
-
-  const rect =
-    coupleScene.getBoundingClientRect();
-
-
-  const viewportCenter =
-    window.innerHeight / 2;
-
-
-  const sceneCenter =
-    rect.top +
-    rect.height / 2;
-
-
-  const distance =
-    sceneCenter -
-    viewportCenter;
-
-
-  const normalized =
-    Math.max(
-      -1,
-      Math.min(
-        1,
-        distance /
-        window.innerHeight
-      )
-    );
-
-
-  const y =
-    normalized * -14;
-
-
-  const z =
-    normalized * -18;
-
-
-  coupleScene.style.setProperty(
-    "--couple-y",
-    `${y}px`
-  );
-
-
-  coupleScene.style.setProperty(
-    "--couple-z",
-    `${z}px`
-  );
-
-}
-
-
-window.addEventListener(
-  "scroll",
-  updateCoupleParallax,
-  {
-    passive: true
-  }
-);
-
-
-window.addEventListener(
-  "resize",
-  updateCoupleParallax
-);
-
-
-updateCoupleParallax();
 
 
 /* =========================================================
@@ -499,15 +355,29 @@ const rings =
 
 const ringObserver =
   new IntersectionObserver(
-    entries => {
+    (entries) => {
 
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
 
         if (entry.isIntersecting) {
 
-          entry.target.classList.add(
-            "ring-visible"
-          );
+          entry.target.style.transition =
+            "transform 1.5s cubic-bezier(.16,1,.3,1)";
+
+          if (
+            entry.target.classList.contains(
+              "ring-one"
+            )
+          ) {
+
+            entry.target.style.transform =
+              "rotate(-20deg) translateY(-10px)";
+
+          } else {
+
+            entry.target.style.transform =
+              "rotate(20deg) translateY(-10px)";
+          }
 
         }
 
@@ -515,15 +385,13 @@ const ringObserver =
 
     },
     {
-      threshold: .25
+      threshold: .4
     }
   );
 
 
-rings.forEach(ring => {
-
+rings.forEach((ring) => {
   ringObserver.observe(ring);
-
 });
 
 
@@ -531,282 +399,126 @@ rings.forEach(ring => {
    AUTO SCROLL
 ========================================================= */
 
-let autoScrollActive = false;
-
-let autoScrollTimer = null;
-
-let autoScrollIndex = 0;
-
-let userInterrupted = false;
+let autoScrollFrame = null;
+let autoScrollCancelled = false;
 
 
-const autoScrollSections =
-  document.querySelectorAll(
-    "#invitation > .section"
-  );
+function cancelAutoScroll() {
+
+  autoScrollCancelled = true;
+
+  if (autoScrollFrame) {
+
+    cancelAnimationFrame(
+      autoScrollFrame
+    );
+
+    autoScrollFrame = null;
+  }
+}
 
 
 function startAutoScroll() {
 
-  if (autoScrollActive) return;
+  if (autoScrollStarted) return;
 
-  if (userInterrupted) return;
+  if (autoScrollCancelled) return;
 
-  autoScrollActive = true;
-
-  autoScrollIndex = 0;
+  autoScrollStarted = true;
 
 
-  autoScrollTimer =
-    setTimeout(
-      moveToNextSection,
-      4200
+  const scrollSpeed = 0.35;
+
+
+  function move() {
+
+    if (autoScrollCancelled) return;
+
+
+    const maxScroll =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
+
+
+    if (window.scrollY >= maxScroll - 5) {
+
+      autoScrollFrame = null;
+
+      return;
+    }
+
+
+    window.scrollBy(
+      0,
+      scrollSpeed
     );
 
-}
 
-
-function moveToNextSection() {
-
-  if (!autoScrollActive) return;
-
-  if (userInterrupted) {
-
-    stopAutoScroll();
-
-    return;
-
+    autoScrollFrame =
+      requestAnimationFrame(move);
   }
 
 
-  if (
-    autoScrollIndex >=
-    autoScrollSections.length - 1
-  ) {
-
-    stopAutoScroll();
-
-    return;
-
-  }
-
-
-  autoScrollIndex++;
-
-
-  const nextSection =
-    autoScrollSections[
-      autoScrollIndex
-    ];
-
-
-  if (!nextSection) {
-
-    stopAutoScroll();
-
-    return;
-
-  }
-
-
-  nextSection.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-
-
-  autoScrollTimer =
-    setTimeout(
-      moveToNextSection,
-      5200
-    );
-
+  autoScrollFrame =
+    requestAnimationFrame(move);
 }
 
 
-function stopAutoScroll() {
+/*
+  Any interaction cancels the
+  automatic scrolling.
+*/
 
-  autoScrollActive = false;
-
-  clearTimeout(
-    autoScrollTimer
-  );
-
-  autoScrollTimer = null;
-
-}
-
-
-/* =========================================================
-   USER INTERACTION CANCELS AUTO SCROLL
-========================================================= */
-
-function interruptAutoScroll() {
-
-  if (!invitationOpened) return;
-
-  userInterrupted = true;
-
-  stopAutoScroll();
-
-}
-
-
-window.addEventListener(
+[
   "wheel",
-  interruptAutoScroll,
-  {
-    passive: true
-  }
-);
-
-
-window.addEventListener(
   "touchstart",
-  interruptAutoScroll,
-  {
-    passive: true
-  }
-);
-
-
-window.addEventListener(
   "touchmove",
-  interruptAutoScroll,
-  {
-    passive: true
-  }
-);
+  "pointerdown",
+  "keydown"
+].forEach((eventName) => {
 
-
-window.addEventListener(
-  "keydown",
-  event => {
-
-    const keys = [
-      "ArrowDown",
-      "ArrowUp",
-      "PageDown",
-      "PageUp",
-      " ",
-      "Home",
-      "End"
-    ];
-
-
-    if (keys.includes(event.key)) {
-
-      interruptAutoScroll();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   MOUSE MOVE DEPTH
-========================================================= */
-
-const hero =
-  document.querySelector(".hero");
-
-
-if (hero && !("ontouchstart" in window)) {
-
-  hero.addEventListener(
-    "mousemove",
-    event => {
-
-      const x =
-        (event.clientX /
-          window.innerWidth) -
-        .5;
-
-
-      const y =
-        (event.clientY /
-          window.innerHeight) -
-        .5;
-
-
-      const couple =
-        document.querySelector(
-          ".couple-art"
-        );
-
-
-      if (couple) {
-
-        couple.style.marginLeft =
-          `${x * 10}px`;
-
-        couple.style.marginTop =
-          `${y * 7}px`;
-
-      }
-
-    }
-  );
-
-
-  hero.addEventListener(
-    "mouseleave",
+  window.addEventListener(
+    eventName,
     () => {
 
-      const couple =
-        document.querySelector(
-          ".couple-art"
-        );
-
-
-      if (couple) {
-
-        couple.style.marginLeft = "0";
-
-        couple.style.marginTop = "0";
-
+      if (
+        eventName === "keydown" &&
+        ![
+          "ArrowDown",
+          "ArrowUp",
+          "PageDown",
+          "PageUp",
+          " ",
+          "Home",
+          "End"
+        ].includes(event.key)
+      ) {
+        return;
       }
 
-    }
-  );
-
-}
-
-
-/* =========================================================
-   PREVENT DOUBLE TAP / BUTTON ISSUES
-========================================================= */
-
-if (envelopeButton) {
-
-  envelopeButton.addEventListener(
-    "touchend",
-    event => {
-
-      event.preventDefault();
-
-      if (!invitationOpened) {
-
-        openInvitation();
-
-      }
+      cancelAutoScroll();
 
     },
     {
-      passive: false
+      passive:
+        eventName !== "keydown"
     }
   );
 
-}
+});
 
 
 /* =========================================================
-   INITIAL UI
+   INITIAL STATE
 ========================================================= */
 
-updateMusicButton();
+window.addEventListener(
+  "load",
+  () => {
 
-updateSceneDepth();
+    updateCountdown();
 
-updateCoupleParallax();
+    updateSceneDepth();
+
+  }
+);
