@@ -1,37 +1,65 @@
-const weddingDate = new Date("2026-09-13T19:00:00+03:00");
-
-const welcome = document.getElementById("welcome");
-const envelope = document.querySelector(".envelope");
-
-const sealButton = document.getElementById("sealButton");
-const openButton = document.getElementById("openButton");
-
-const music = document.getElementById("weddingMusic");
-const musicButton = document.getElementById("musicButton");
-
-const days = document.getElementById("days");
-const hours = document.getElementById("hours");
-const minutes = document.getElementById("minutes");
-const seconds = document.getElementById("seconds");
-
-const ringsSection = document.getElementById("rings-section");
-
-let opened = false;
+const weddingDate =
+  new Date("2026-09-13T19:00:00+03:00");
 
 
-/* =========================
+const welcome =
+  document.getElementById("welcome");
+
+const envelope =
+  document.querySelector(".envelope");
+
+const sealButton =
+  document.getElementById("sealButton");
+
+const openButton =
+  document.getElementById("openButton");
+
+
+const music =
+  document.getElementById("weddingMusic");
+
+const musicButton =
+  document.getElementById("musicButton");
+
+
+const days =
+  document.getElementById("days");
+
+const hours =
+  document.getElementById("hours");
+
+const minutes =
+  document.getElementById("minutes");
+
+const seconds =
+  document.getElementById("seconds");
+
+
+const ringsSection =
+  document.getElementById("rings-section");
+
+
+let invitationOpened = false;
+
+
+/* =================================
    OPEN INVITATION
-========================= */
+================================= */
 
 async function openInvitation() {
 
-  if (opened) return;
+  if (invitationOpened) return;
 
-  opened = true;
+  invitationOpened = true;
+
+
+  /* Open envelope */
 
   envelope.classList.add("open");
 
-  /* Start music after user click */
+
+  /* Start music */
+
   try {
 
     await music.play();
@@ -40,9 +68,14 @@ async function openInvitation() {
 
   } catch (error) {
 
-    console.log("Music playback was blocked.");
+    console.log(
+      "Music autoplay was blocked."
+    );
 
   }
+
+
+  /* Hide opening */
 
   setTimeout(() => {
 
@@ -50,59 +83,83 @@ async function openInvitation() {
 
     document.body.classList.remove("locked");
 
-  }, 1200);
+  }, 1500);
+
+
+  /* Start slow scroll */
+
+  setTimeout(() => {
+
+    startAutoScroll();
+
+  }, 3500);
 
 }
 
 
-/* Seal */
-sealButton.addEventListener("click", openInvitation);
+sealButton.addEventListener(
+  "click",
+  openInvitation
+);
 
 
-/* Open button */
-openButton.addEventListener("click", openInvitation);
+openButton.addEventListener(
+  "click",
+  openInvitation
+);
 
 
-/* =========================
+/* =================================
    MUSIC
-========================= */
+================================= */
 
-musicButton.addEventListener("click", async () => {
+musicButton.addEventListener(
+  "click",
+  async () => {
 
-  if (music.paused) {
+    if (music.paused) {
 
-    try {
+      try {
 
-      await music.play();
+        await music.play();
 
-      musicButton.classList.add("playing");
+        musicButton.classList.add(
+          "playing"
+        );
 
-    } catch (error) {
+      } catch (error) {
 
-      console.log("Music could not play.");
+        console.log(
+          "Music could not play."
+        );
+
+      }
+
+    } else {
+
+      music.pause();
+
+      musicButton.classList.remove(
+        "playing"
+      );
 
     }
 
-  } else {
-
-    music.pause();
-
-    musicButton.classList.remove("playing");
-
   }
+);
 
-});
 
-
-/* =========================
+/* =================================
    COUNTDOWN
-========================= */
+================================= */
 
 function updateCountdown() {
 
   const now = new Date();
 
-  const difference = weddingDate - now;
+  const difference =
+    weddingDate - now;
+
 
   if (difference <= 0) {
 
@@ -115,19 +172,31 @@ function updateCountdown() {
 
   }
 
-  const totalSeconds = Math.floor(difference / 1000);
 
-  const d = Math.floor(totalSeconds / 86400);
+  const totalSeconds =
+    Math.floor(difference / 1000);
 
-  const h = Math.floor(
-    (totalSeconds % 86400) / 3600
-  );
 
-  const m = Math.floor(
-    (totalSeconds % 3600) / 60
-  );
+  const d =
+    Math.floor(
+      totalSeconds / 86400
+    );
 
-  const s = totalSeconds % 60;
+
+  const h =
+    Math.floor(
+      (totalSeconds % 86400) / 3600
+    );
+
+
+  const m =
+    Math.floor(
+      (totalSeconds % 3600) / 60
+    );
+
+
+  const s =
+    totalSeconds % 60;
 
 
   days.textContent =
@@ -144,108 +213,88 @@ function updateCountdown() {
 
 }
 
+
 updateCountdown();
 
-setInterval(updateCountdown, 1000);
-
-
-/* =========================
-   RINGS ANIMATION
-========================= */
-
-let ringsPlayed = false;
-
-const ringsObserver = new IntersectionObserver(
-
-  (entries) => {
-
-    entries.forEach((entry) => {
-
-      if (
-        entry.isIntersecting &&
-        !ringsPlayed
-      ) {
-
-        ringsPlayed = true;
-
-        ringsSection.classList.add("animate");
-
-        ringsObserver.unobserve(ringsSection);
-
-      }
-
-    });
-
-  },
-
-  {
-    threshold: 0.35
-  }
-
+setInterval(
+  updateCountdown,
+  1000
 );
 
-ringsObserver.observe(ringsSection);
+
+/* =================================
+   RINGS ANIMATION
+================================= */
+
+let ringsAnimated = false;
 
 
-/* =========================
-   MESSAGE BUTTON
-========================= */
+const ringsObserver =
+  new IntersectionObserver(
 
-const messageButton =
-  document.getElementById("messageButton");
+    (entries) => {
 
-messageButton.addEventListener("click", () => {
+      entries.forEach((entry) => {
 
-  const name =
-    document.getElementById("guestName").value.trim();
+        if (
+          entry.isIntersecting &&
+          !ringsAnimated
+        ) {
 
-  const message =
-    document.getElementById("guestMessage").value.trim();
+          ringsAnimated = true;
 
+          ringsSection.classList.add(
+            "animate"
+          );
 
-  if (!name || !message) {
+          ringsObserver.unobserve(
+            ringsSection
+          );
 
-    alert("Please enter your name and message.");
+        }
 
-    return;
+      });
 
-  }
+    },
 
+    {
+      threshold: 0.35
+    }
 
-  alert(
-    "Thank you, " +
-    name +
-    "! Your message means a lot to Walid & Yasmine. ♥"
   );
 
 
-  document.getElementById("guestName").value = "";
-
-  document.getElementById("guestMessage").value = "";
-
-});
+ringsObserver.observe(
+  ringsSection
+);
 
 
-/* =========================
-   SLOW AUTO SCROLL
-========================= */
+/* =================================
+   AUTO SCROLL
+================================= */
 
 let autoScrollStarted = false;
-let userScrolling = false;
-let userTimer;
+
+let userInteracting = false;
+
+let interactionTimer;
 
 
 function pauseAutoScroll() {
 
-  userScrolling = true;
+  userInteracting = true;
 
-  clearTimeout(userTimer);
+  clearTimeout(
+    interactionTimer
+  );
 
-  userTimer = setTimeout(() => {
 
-    userScrolling = false;
+  interactionTimer =
+    setTimeout(() => {
 
-  }, 7000);
+      userInteracting = false;
+
+    }, 7000);
 
 }
 
@@ -256,11 +305,13 @@ window.addEventListener(
   { passive: true }
 );
 
+
 window.addEventListener(
   "wheel",
   pauseAutoScroll,
   { passive: true }
 );
+
 
 window.addEventListener(
   "pointerdown",
@@ -271,11 +322,9 @@ window.addEventListener(
 
 function wait(ms) {
 
-  return new Promise(resolve => {
-
-    setTimeout(resolve, ms);
-
-  });
+  return new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
 
 }
 
@@ -286,7 +335,8 @@ async function startAutoScroll() {
 
   autoScrollStarted = true;
 
-  await wait(3500);
+
+  await wait(2500);
 
 
   const sections =
@@ -295,9 +345,11 @@ async function startAutoScroll() {
     );
 
 
-  for (const section of sections) {
+  for (
+    const section of sections
+  ) {
 
-    if (userScrolling) {
+    if (userInteracting) {
 
       await wait(2000);
 
@@ -315,9 +367,13 @@ async function startAutoScroll() {
     });
 
 
-    if (section.id === "rings-section") {
+    /* Longer pause at rings */
 
-      await wait(6500);
+    if (
+      section.id === "rings-section"
+    ) {
+
+      await wait(7500);
 
     } else {
 
@@ -328,29 +384,3 @@ async function startAutoScroll() {
   }
 
 }
-
-
-/* Start auto-scroll after opening */
-const originalOpenInvitation = openInvitation;
-
-
-/* Slight delay so the first section can breathe */
-sealButton.addEventListener("click", () => {
-
-  setTimeout(() => {
-
-    startAutoScroll();
-
-  }, 2500);
-
-});
-
-openButton.addEventListener("click", () => {
-
-  setTimeout(() => {
-
-    startAutoScroll();
-
-  }, 2500);
-
-});
