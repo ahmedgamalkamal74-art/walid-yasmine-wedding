@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Walid & Yasmine | Wedding Invitation</title>
+  <title>Walid & Yasmin | Wedding Invitation</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap"
+    rel="stylesheet"
+  >
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -24,23 +27,21 @@
 
     <div class="gold-particles"></div>
 
-    <!-- Animated Jasmine -->
-    <div class="jasmine jasmine-left">
-      <span class="stem"></span>
-      <i class="flower flower-1">✿</i>
-      <i class="flower flower-2">✿</i>
-      <i class="flower flower-3">✿</i>
-      <i class="flower flower-4">✿</i>
+    <div class="opening-floral floral-left" aria-hidden="true">
+      <span></span>
+      <i>✿</i>
+      <i>✿</i>
+      <i>✿</i>
+      <i>✿</i>
     </div>
 
-    <div class="jasmine jasmine-right">
-      <span class="stem"></span>
-      <i class="flower flower-1">✿</i>
-      <i class="flower flower-2">✿</i>
-      <i class="flower flower-3">✿</i>
-      <i class="flower flower-4">✿</i>
+    <div class="opening-floral floral-right" aria-hidden="true">
+      <span></span>
+      <i>✿</i>
+      <i>✿</i>
+      <i>✿</i>
+      <i>✿</i>
     </div>
-
 
     <div class="welcome-content">
 
@@ -49,56 +50,52 @@
       </p>
 
       <div class="opening-names">
-        Walid <span>&</span> Yasmine
+        Walid <span>&</span> Yasmin
       </div>
 
       <p class="opening-date">
         13 · 09 · 2026
       </p>
 
-
       <!-- Envelope -->
-
       <div class="envelope-wrapper">
 
-        <div class="envelope">
+        <button
+          id="envelopeButton"
+          class="envelope-button"
+          aria-label="Open wedding invitation"
+          type="button"
+        >
 
-          <div class="envelope-back"></div>
+          <div class="envelope">
 
-          <div class="letter">
-            <div class="letter-monogram">
-              W <span>&</span> Y
+            <div class="envelope-back"></div>
+
+            <div class="letter">
+              <div class="letter-monogram">
+                W <span>&</span> Y
+              </div>
             </div>
+
+            <div class="envelope-flap"></div>
+
+            <div class="envelope-front"></div>
+
+            <div class="wax-seal" aria-hidden="true">
+              <span>W</span>
+              <b>&</b>
+              <span>Y</span>
+            </div>
+
           </div>
 
-          <div class="envelope-flap"></div>
-
-          <div class="envelope-front"></div>
-
-
-          <button
-            id="sealButton"
-            class="wax-seal"
-            aria-label="Open invitation"
-          >
-            <span>W</span>
-            <b>&</b>
-            <span>Y</span>
-          </button>
-
-        </div>
+        </button>
 
       </div>
 
-
-      <p class="seal-hint">
-        CLICK THE SEAL TO OPEN
+      <p class="envelope-hint">
+        A SPECIAL INVITATION
       </p>
-
-      <button id="openButton" class="open-button">
-        OPEN INVITATION
-        <span>♡</span>
-      </button>
 
     </div>
 
@@ -111,13 +108,12 @@
 
   <main id="invitation">
 
-
     <!-- HERO -->
 
     <section class="hero section">
 
-      <div class="leaf-decoration leaf-one">❧</div>
-      <div class="leaf-decoration leaf-two">❧</div>
+      <div class="leaf-decoration leaf-one" aria-hidden="true">❧</div>
+      <div class="leaf-decoration leaf-two" aria-hidden="true">❧</div>
 
       <div class="section-inner">
 
@@ -126,7 +122,7 @@
         </p>
 
         <div class="hero-names">
-          Walid & Yasmine
+          Walid & Yasmin
         </div>
 
         <div class="gold-line">
@@ -161,8 +157,8 @@
 
     <section class="countdown-section section">
 
-      <div class="soft-leaf soft-left">❧</div>
-      <div class="soft-leaf soft-right">❧</div>
+      <div class="soft-leaf soft-left" aria-hidden="true">❧</div>
+      <div class="soft-leaf soft-right" aria-hidden="true">❧</div>
 
       <div class="section-inner">
 
@@ -214,8 +210,8 @@
       class="story-section section"
     >
 
-      <div class="story-decoration story-left">❧</div>
-      <div class="story-decoration story-right">❧</div>
+      <div class="story-decoration story-left" aria-hidden="true">❧</div>
+      <div class="story-decoration story-right" aria-hidden="true">❧</div>
 
       <div class="section-inner story-inner">
 
@@ -237,7 +233,6 @@
 
         </div>
 
-
         <div class="ring-stage">
 
           <div class="ring ring-left">
@@ -248,15 +243,14 @@
             <span class="diamond"></span>
           </div>
 
-          <div class="ring-sparkles">
+          <div class="ring-sparkles" aria-hidden="true">
             ✦
           </div>
 
         </div>
 
-
         <div class="story-names">
-          WALID & YASMINE
+          WALID & YASMIN
         </div>
 
       </div>
@@ -295,7 +289,7 @@
 
         <div class="signature">
           With love,
-          <strong>Walid & Yasmine</strong>
+          <strong>Walid & Yasmin</strong>
         </div>
 
       </div>
@@ -321,7 +315,6 @@
           <span>✦</span>
         </div>
 
-
         <div class="details-grid">
 
           <div class="detail-card">
@@ -344,7 +337,6 @@
 
           </div>
 
-
           <div class="detail-card">
 
             <div class="detail-symbol">
@@ -364,7 +356,6 @@
             </p>
 
           </div>
-
 
           <div class="detail-card">
 
@@ -397,8 +388,8 @@
 
     <section class="venue-section section">
 
-      <div class="venue-leaves venue-left">❧</div>
-      <div class="venue-leaves venue-right">❧</div>
+      <div class="venue-leaves venue-left" aria-hidden="true">❧</div>
+      <div class="venue-leaves venue-right" aria-hidden="true">❧</div>
 
       <div class="section-inner">
 
@@ -458,7 +449,6 @@
           <span>♡</span>
         </div>
 
-
         <div class="timeline">
 
           <div class="timeline-item">
@@ -472,7 +462,6 @@
 
           </div>
 
-
           <div class="timeline-item">
 
             <span>02</span>
@@ -483,7 +472,6 @@
             </div>
 
           </div>
-
 
           <div class="timeline-item">
 
@@ -507,8 +495,8 @@
 
     <section class="final-section section">
 
-      <div class="final-jasmine final-left">✿</div>
-      <div class="final-jasmine final-right">✿</div>
+      <div class="final-jasmine final-left" aria-hidden="true">✿</div>
+      <div class="final-jasmine final-right" aria-hidden="true">✿</div>
 
       <div class="section-inner">
 
@@ -517,7 +505,7 @@
         </p>
 
         <div class="final-names">
-          Walid & Yasmine
+          Walid & Yasmin
         </div>
 
         <div class="final-date">
@@ -536,7 +524,7 @@
     <footer>
 
       <p>
-        Made with love for Walid & Yasmine
+        Made with love for Walid & Yasmin
       </p>
 
       <span>
@@ -554,18 +542,17 @@
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
-
   <button
     id="musicButton"
     class="music-button"
     aria-label="Toggle music"
+    type="button"
   >
     <span>♫</span>
     <small>MUSIC</small>
   </button>
 
-
   <script src="script.js"></script>
 
 </body>
-  </html>
+          </html>
