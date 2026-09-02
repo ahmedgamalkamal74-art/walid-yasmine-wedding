@@ -1,77 +1,93 @@
 const weddingDate = new Date("2026-09-13T19:00:00+03:00");
 
-const welcomeScreen = document.getElementById("welcome");
-const enterButton = document.getElementById("enterButton");
+const welcome = document.getElementById("welcome");
 const envelope = document.querySelector(".envelope");
 
-const music = document.getElementById("weddingMusic");
-const musicToggle = document.getElementById("musicToggle");
+const sealButton = document.getElementById("sealButton");
+const openButton = document.getElementById("openButton");
 
-const daysElement = document.getElementById("days");
-const hoursElement = document.getElementById("hours");
-const minutesElement = document.getElementById("minutes");
-const secondsElement = document.getElementById("seconds");
+const music = document.getElementById("weddingMusic");
+const musicButton = document.getElementById("musicButton");
+
+const days = document.getElementById("days");
+const hours = document.getElementById("hours");
+const minutes = document.getElementById("minutes");
+const seconds = document.getElementById("seconds");
 
 const ringsSection = document.getElementById("rings-section");
 
-let musicPlaying = false;
-let invitationEntered = false;
+let opened = false;
 
 
 /* =========================
-   ENTER INVITATION
+   OPEN INVITATION
 ========================= */
 
-enterButton.addEventListener("click", async () => {
+async function openInvitation() {
 
-  if (invitationEntered) return;
+  if (opened) return;
 
-  invitationEntered = true;
+  opened = true;
 
   envelope.classList.add("open");
 
+  /* Start music after user click */
   try {
+
     await music.play();
 
-    musicPlaying = true;
-    musicToggle.classList.add("playing");
+    musicButton.classList.add("playing");
 
   } catch (error) {
-    console.log("Music could not start automatically.");
+
+    console.log("Music playback was blocked.");
+
   }
 
   setTimeout(() => {
-    welcomeScreen.classList.add("hidden");
-    document.body.classList.remove("no-scroll");
-  }, 900);
 
-});
+    welcome.classList.add("opened");
+
+    document.body.classList.remove("locked");
+
+  }, 1200);
+
+}
+
+
+/* Seal */
+sealButton.addEventListener("click", openInvitation);
+
+
+/* Open button */
+openButton.addEventListener("click", openInvitation);
 
 
 /* =========================
-   MUSIC BUTTON
+   MUSIC
 ========================= */
 
-musicToggle.addEventListener("click", async () => {
+musicButton.addEventListener("click", async () => {
 
   if (music.paused) {
 
     try {
+
       await music.play();
 
-      musicPlaying = true;
-      musicToggle.classList.add("playing");
+      musicButton.classList.add("playing");
 
     } catch (error) {
+
       console.log("Music could not play.");
+
     }
 
   } else {
 
     music.pause();
 
-    musicPlaying = false;
-    musicToggle.classList.remove("playing");
+    musicButton.classList.remove("playing");
 
   }
 
@@ -85,39 +101,46 @@ musicToggle.addEventListener("click", async () => {
 function updateCountdown() {
 
   const now = new Date();
+
   const difference = weddingDate - now;
 
   if (difference <= 0) {
 
-    daysElement.textContent = "00";
-    hoursElement.textContent = "00";
-    minutesElement.textContent = "00";
-    secondsElement.textContent = "00";
+    days.textContent = "00";
+    hours.textContent = "00";
+    minutes.textContent = "00";
+    seconds.textContent = "00";
 
     return;
+
   }
 
   const totalSeconds = Math.floor(difference / 1000);
 
-  const days = Math.floor(totalSeconds / 86400);
+  const d = Math.floor(totalSeconds / 86400);
 
-  const hours = Math.floor(
+  const h = Math.floor(
     (totalSeconds % 86400) / 3600
   );
 
-  const minutes = Math.floor(
+  const m = Math.floor(
     (totalSeconds % 3600) / 60
   );
 
-  const seconds = totalSeconds % 60;
+  const s = totalSeconds % 60;
 
-  daysElement.textContent = String(days).padStart(2, "0");
 
-  hoursElement.textContent = String(hours).padStart(2, "0");
+  days.textContent =
+    String(d).padStart(2, "0");
 
-  minutesElement.textContent = String(minutes).padStart(2, "0");
+  hours.textContent =
+    String(h).padStart(2, "0");
 
-  secondsElement.textContent = String(seconds).padStart(2, "0");
+  minutes.textContent =
+    String(m).padStart(2, "0");
+
+  seconds.textContent =
+    String(s).padStart(2, "0");
 
 }
 
@@ -130,19 +153,20 @@ setInterval(updateCountdown, 1000);
    RINGS ANIMATION
 ========================= */
 
-let ringsAnimated = false;
+let ringsPlayed = false;
 
 const ringsObserver = new IntersectionObserver(
+
   (entries) => {
 
     entries.forEach((entry) => {
 
       if (
         entry.isIntersecting &&
-        !ringsAnimated
+        !ringsPlayed
       ) {
 
-        ringsAnimated = true;
+        ringsPlayed = true;
 
         ringsSection.classList.add("animate");
 
@@ -153,88 +177,78 @@ const ringsObserver = new IntersectionObserver(
     });
 
   },
+
   {
     threshold: 0.35
   }
+
 );
 
 ringsObserver.observe(ringsSection);
 
 
 /* =========================
-   SLOW AUTO SCROLL
+   MESSAGE BUTTON
 ========================= */
 
-let autoScrolling = false;
-let userInteracting = false;
+const messageButton =
+  document.getElementById("messageButton");
 
-function sleep(milliseconds) {
-  return new Promise(resolve => {
-    setTimeout(resolve, milliseconds);
-  });
-}
+messageButton.addEventListener("click", () => {
+
+  const name =
+    document.getElementById("guestName").value.trim();
+
+  const message =
+    document.getElementById("guestMessage").value.trim();
 
 
-async function startAutoScroll() {
+  if (!name || !message) {
 
-  if (autoScrolling) return;
+    alert("Please enter your name and message.");
 
-  autoScrolling = true;
-
-  await sleep(2500);
-
-  const sections = document.querySelectorAll(
-    "#invitation > .section"
-  );
-
-  for (const section of sections) {
-
-    if (userInteracting) {
-      await sleep(1500);
-      continue;
-    }
-
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
-    if (section.id === "rings-section") {
-
-      await sleep(6500);
-
-    } else {
-
-      await sleep(3500);
-
-    }
+    return;
 
   }
 
-  autoScrolling = false;
 
-}
+  alert(
+    "Thank you, " +
+    name +
+    "! Your message means a lot to Walid & Yasmine. ♥"
+  );
+
+
+  document.getElementById("guestName").value = "";
+
+  document.getElementById("guestMessage").value = "";
+
+});
 
 
 /* =========================
-   USER INTERACTION
+   SLOW AUTO SCROLL
 ========================= */
 
-let interactionTimer;
+let autoScrollStarted = false;
+let userScrolling = false;
+let userTimer;
+
 
 function pauseAutoScroll() {
 
-  userInteracting = true;
+  userScrolling = true;
 
-  clearTimeout(interactionTimer);
+  clearTimeout(userTimer);
 
-  interactionTimer = setTimeout(() => {
+  userTimer = setTimeout(() => {
 
-    userInteracting = false;
+    userScrolling = false;
 
-  }, 5000);
+  }, 7000);
 
 }
+
 
 window.addEventListener(
   "touchstart",
@@ -255,14 +269,88 @@ window.addEventListener(
 );
 
 
-/* =========================
-   START AUTO SCROLL
-========================= */
+function wait(ms) {
 
-setTimeout(() => {
+  return new Promise(resolve => {
 
-  if (invitationEntered) {
-    startAutoScroll();
+    setTimeout(resolve, ms);
+
+  });
+
+}
+
+
+async function startAutoScroll() {
+
+  if (autoScrollStarted) return;
+
+  autoScrollStarted = true;
+
+  await wait(3500);
+
+
+  const sections =
+    document.querySelectorAll(
+      "#invitation > .section"
+    );
+
+
+  for (const section of sections) {
+
+    if (userScrolling) {
+
+      await wait(2000);
+
+      continue;
+
+    }
+
+
+    section.scrollIntoView({
+
+      behavior: "smooth",
+
+      block: "start"
+
+    });
+
+
+    if (section.id === "rings-section") {
+
+      await wait(6500);
+
+    } else {
+
+      await wait(4500);
+
+    }
+
   }
 
-}, 4500);
+}
+
+
+/* Start auto-scroll after opening */
+const originalOpenInvitation = openInvitation;
+
+
+/* Slight delay so the first section can breathe */
+sealButton.addEventListener("click", () => {
+
+  setTimeout(() => {
+
+    startAutoScroll();
+
+  }, 2500);
+
+});
+
+openButton.addEventListener("click", () => {
+
+  setTimeout(() => {
+
+    startAutoScroll();
+
+  }, 2500);
+
+});
