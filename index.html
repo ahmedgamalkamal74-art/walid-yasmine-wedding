@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eee2cf">
+<title>Walid & Yasmine | Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+<audio id="music" src="music.mp3" loop preload="auto"></audio>
+<audio id="fireworkSound" preload="auto" crossorigin="anonymous">
+  <source src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Part_of_fireworks.ogg" type="audio/ogg">
+</audio>
+
+<div id="opening" class="opening">
+  <div id="quran" class="quran-screen">
+    <div class="quran-frame">
+      <span class="mini-ornament">۞</span>
+      <p class="quran-text">﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾</p>
+      <span class="quran-ref">سورة الروم · ٢١</span>
+    </div>
+  </div>
+  <div id="envelopeScene" class="envelope-scene is-hidden">
+    <div class="envelope-caption">WALID &amp; YASMINE</div>
+    <button id="openInvitation" class="envelope-button" type="button" aria-label="فتح الدعوة">
+      <span class="envelope-back"></span>
+      <span class="envelope-paper"><b>W</b><span>&amp;</span><b>Y</b><small>13 · 09 · 2026</small></span>
+      <span class="envelope-flap"></span>
+      <span class="seal">W&amp;Y</span>
+    </button>
+    <p class="open-hint">Tap to open the invitation</p>
+  </div>
+</div>
+
+<header class="topbar">
+  <button id="musicBtn" type="button">♫ <span>الموسيقى</span></button>
+  <button id="autoBtn" type="button">AUTO SCROLL</button>
+</header>
+
+<main id="invitation">
+  <section class="scene hero-scene" data-stop>
+    <div class="photo hero-photo"></div>
+    <div class="vignette"></div>
+    <div class="hero-copy reveal">
+      <div class="eyebrow">WITH ALL OUR HEARTS</div>
+      <h1>Walid <i>&amp;</i> Yasmine</h1>
+      <p>WE'RE GETTING MARRIED</p>
+      <div class="date">13 SEPTEMBER 2026 · 7:00 PM</div>
+    </div>
+    <div class="scroll-mark">SCROLL TO EXPERIENCE <span>↓</span></div>
+  </section>
+
+  <section class="scene chandelier-scene" data-stop>
+    <div class="chandelier-wrap">
+      <div class="photo chandelier-photo"></div>
+      <div class="chandelier-glow"></div>
+    </div>
+    <div class="scene-copy reveal">
+      <span class="eyebrow">A NIGHT TO REMEMBER</span>
+      <h2>The celebration begins</h2>
+      <p>نور القاعة، تفاصيل هادئة، ولحظة نبدأ فيها فصلًا جديدًا.</p>
+    </div>
+  </section>
+
+  <section class="scene countdown-scene" data-stop>
+    <div class="garland-photo photo"></div>
+    <div class="garland-wire"></div>
+    <div class="countdown-content reveal">
+      <span class="eyebrow">COUNTING THE MOMENTS</span>
+      <h2>Until our forever</h2>
+      <div id="countdown" class="countdown">
+        <div><strong id="days">--</strong><span>DAYS</span></div>
+        <i>:</i><div><strong id="hours">--</strong><span>HOURS</span></div>
+        <i>:</i><div><strong id="minutes">--</strong><span>MINUTES</span></div>
+        <i>:</i><div><strong id="seconds">--</strong><span>SECONDS</span></div>
+      </div>
+      <div class="jasmine-mark"><span>✦</span> jasmine &amp; light <span>✦</span></div>
+    </div>
+  </section>
+
+  <section id="ringsScene" class="scene rings-scene" data-stop>
+    <div class="sky"></div>
+    <div class="rings-photo photo"></div>
+    <div class="ring ring-left"></div>
+    <div class="ring ring-right"></div>
+    <div id="fireworks" class="fireworks" aria-hidden="true">
+      <span class="burst b1"></span><span class="burst b2"></span><span class="burst b3"></span>
+    </div>
+    <div class="rings-copy reveal">
+      <span class="eyebrow">TWO HEARTS · ONE PROMISE</span>
+      <h2>Our story, together</h2>
+      <p>وعندما تلتقي الخواتم، تبدأ الحكاية التي نريد أن نكملها معكم.</p>
+    </div>
+  </section>
+
+  <section class="content-scene details-scene" data-stop>
+    <div class="content-inner reveal">
+      <span class="eyebrow">THE DETAILS</span>
+      <h2>كل التفاصيل التي ننتظرها معكم</h2>
+      <div class="detail-grid">
+        <article><span>DATE</span><strong>Sunday</strong><p>13 September 2026</p></article>
+        <article><span>TIME</span><strong>7:00 PM</strong><p>Reception</p></article>
+        <article><span>VENUE</span><strong>Lavendola</strong><p>Tiba Rose Hotel · New Cairo</p></article>
+      </div>
+      <a class="location" target="_blank" rel="noopener" href="https://maps.app.goo.gl/3LwrwyuWPGNcZtKw9?g_st=ac">VIEW LOCATION ↗</a>
+    </div>
+  </section>
+
+  <section class="content-scene timeline-scene" data-stop>
+    <div class="content-inner reveal">
+      <span class="eyebrow">THE EVENING</span>
+      <h2>لحظات الليلة</h2>
+      <div class="timeline">
+        <div><b>07:00</b><span>WELCOME</span><small>Guests arrive</small></div>
+        <div><b>08:00</b><span>THE CELEBRATION</span><small>Let the moments begin</small></div>
+        <div><b>09:00</b><span>DINNER &amp; MUSIC</span><small>A beautiful evening together</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-scene message-scene" data-stop>
+    <div class="content-inner reveal">
+      <span class="eyebrow">A MESSAGE FOR US</span>
+      <h2>كلمة منكم تهمنا</h2>
+      <p class="message-intro">وجودكم هو أجمل جزء في يومنا، ولو حابين تسيبوا لنا كلمة هتفضل ذكرى جميلة.</p>
+      <form id="messageForm" class="message-form">
+        <input id="guestName" required placeholder="Your Name" autocomplete="name">
+        <textarea id="guestMessage" required placeholder="Write us a lovely message..."></textarea>
+        <button type="submit">SEND WITH LOVE ♡</button>
+      </form>
+      <p id="formResult" class="form-result" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="final-scene">
+    <div class="final-inner reveal">
+      <span class="eyebrow">FOREVER STARTS HERE</span>
+      <h2>We can't wait to celebrate with you</h2>
+      <div class="final-names">Walid <i>&amp;</i> Yasmine</div>
+      <div class="final-date">13 · 09 · 2026</div>
+      <span class="jasmine">✿</span>
+    </div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
