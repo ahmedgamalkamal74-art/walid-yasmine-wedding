@@ -1,46 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
 
-  const quranScreen = document.getElementById("quranScreen");
-  const envelopeScreen = document.getElementById("envelopeScreen");
-  const envelope = document.getElementById("envelope");
+  const opening = document.getElementById("opening");
+  const quran = document.getElementById("quran");
+  const envelopeScene = document.getElementById("envelopeScene");
   const openInvitation = document.getElementById("openInvitation");
 
   const music = document.getElementById("music");
-  const musicToggle = document.getElementById("musicToggle");
-  const autoScrollBtn = document.getElementById("autoScrollBtn");
+  const musicBtn = document.getElementById("musicBtn");
+  const autoBtn = document.getElementById("autoBtn");
 
   /* =========================
      SETTINGS
   ========================= */
 
   const MUSIC_VOLUME = 0.7;
-  const QURAN_TIME = 4200;
-  const PAUSE_TIME = 2000;
-  const SCROLL_SPEED = 45;
+  const QURAN_DURATION = 4000;
+  const PAUSE_BETWEEN_SCENES = 2000;
 
   let musicPlaying = false;
   let autoScrolling = false;
-  let autoScrollStopped = false;
+  let stopAutoScroll = false;
 
-  music.volume = MUSIC_VOLUME;
 
   /* =========================
-     OPENING
+     QURAN → ENVELOPE
   ========================= */
 
   setTimeout(() => {
-    if (quranScreen) {
-      quranScreen.classList.add("hide");
-    }
+    if (!quran || !envelopeScene) return;
 
-    setTimeout(() => {
-      if (envelopeScreen) {
-        envelopeScreen.classList.add("show");
-      }
-    }, 700);
+    quran.style.opacity = "0";
+    quran.style.visibility = "hidden";
+    quran.style.pointerEvents = "none";
 
-  }, QURAN_TIME);
+    envelopeScene.classList.remove("is-hidden");
+
+    envelopeScene.style.opacity = "0";
+
+    requestAnimationFrame(() => {
+      envelopeScene.style.opacity = "1";
+    });
+
+  }, QURAN_DURATION);
 
 
   /* =========================
@@ -49,75 +51,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openInvitationNow() {
 
-    if (envelope) {
-      envelope.classList.add("opened");
+    if (openInvitation) {
+      openInvitation.classList.add("opened");
     }
 
-    if (envelopeScreen) {
-      envelopeScreen.classList.add("opened");
+    if (envelopeScene) {
+      envelopeScene.style.opacity = "0";
+      envelopeScene.style.visibility = "hidden";
+      envelopeScene.style.pointerEvents = "none";
+    }
+
+    if (opening) {
+      setTimeout(() => {
+        opening.classList.add("done");
+      }, 700);
     }
 
     body.classList.remove("locked");
 
-    /*
-      محاولة تشغيل الموسيقى
-      بعد تفاعل المستخدم مسموح للمتصفح
-    */
+    /* MUSIC */
 
     if (music) {
       music.volume = MUSIC_VOLUME;
 
-      const playPromise = music.play();
-
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            musicPlaying = true;
-            updateMusicButton();
-          })
-          .catch(() => {
-            musicPlaying = false;
-            updateMusicButton();
-          });
-      }
+      music.play()
+        .then(() => {
+          musicPlaying = true;
+          updateMusicButton();
+        })
+        .catch(() => {
+          console.log("Music autoplay was blocked.");
+        });
     }
 
-    /*
-      إظهار المحتوى تدريجياً
-    */
-
-    document.body.classList.add("invitation-open");
+    /* SHOW TOP BAR */
 
     const topbar = document.querySelector(".topbar");
 
     if (topbar) {
-      topbar.classList.add("show");
+      topbar.classList.add("visible");
     }
 
-    setTimeout(() => {
-      const hero = document.querySelector(".hero");
-
-      if (hero) {
-        hero.classList.add("visible");
-      }
-    }, 500);
-
-    /*
-      النزول لبداية الدعوة
-    */
+    /* REVEAL HERO */
 
     setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+      document.querySelectorAll(".reveal").forEach((el) => {
+        el.classList.add("in");
       });
-    }, 1000);
+    }, 900);
   }
 
-
-  if (envelope) {
-    envelope.addEventListener("click", openInvitationNow);
-  }
 
   if (openInvitation) {
     openInvitation.addEventListener("click", openInvitationNow);
@@ -125,50 +108,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================
-     MUSIC BUTTON
+     MUSIC
   ========================= */
 
   function updateMusicButton() {
 
-    if (!musicToggle) return;
+    if (!musicBtn) return;
 
     if (musicPlaying) {
-      musicToggle.innerHTML = "♫ MUSIC";
-      musicToggle.classList.add("playing");
+      musicBtn.innerHTML = "♫ <span>إيقاف الموسيقى</span>";
     } else {
-      musicToggle.innerHTML = "♫ PLAY MUSIC";
-      musicToggle.classList.remove("playing");
+      musicBtn.innerHTML = "♫ <span>الموسيقى</span>";
     }
   }
 
 
-  if (musicToggle) {
+  if (musicBtn) {
 
-    musicToggle.addEventListener("click", async () => {
+    musicBtn.addEventListener("click", async () => {
 
       if (!music) return;
 
       if (music.paused) {
 
         try {
-
           music.volume = MUSIC_VOLUME;
-
           await music.play();
 
           musicPlaying = true;
 
         } catch (error) {
-
-          console.log("Music could not start:", error);
-
-          musicPlaying = false;
+          console.log(error);
         }
 
       } else {
 
         music.pause();
-
         musicPlaying = false;
       }
 
@@ -192,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================
-     REVEAL ANIMATIONS
+     REVEAL ON SCROLL
   ========================= */
 
   const revealElements = document.querySelectorAll(".reveal");
@@ -205,9 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
         entries.forEach((entry) => {
 
           if (entry.isIntersecting) {
-
-            entry.target.classList.add("visible");
-
+            entry.target.classList.add("in");
           }
 
         });
@@ -218,16 +191,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     );
 
-    revealElements.forEach((element) => {
-      observer.observe(element);
+    revealElements.forEach((el) => {
+      observer.observe(el);
     });
 
   } else {
 
-    revealElements.forEach((element) => {
-      element.classList.add("visible");
+    revealElements.forEach((el) => {
+      el.classList.add("in");
     });
-
   }
 
 
@@ -235,12 +207,13 @@ document.addEventListener("DOMContentLoaded", () => {
      COUNTDOWN
   ========================= */
 
-  const daysEl = document.getElementById("days");
-  const hoursEl = document.getElementById("hours");
-  const minutesEl = document.getElementById("minutes");
-  const secondsEl = document.getElementById("seconds");
+  const days = document.getElementById("days");
+  const hours = document.getElementById("hours");
+  const minutes = document.getElementById("minutes");
+  const seconds = document.getElementById("seconds");
 
-  const weddingDate = new Date("2026-09-13T19:00:00+03:00").getTime();
+  const weddingDate =
+    new Date("2026-09-13T19:00:00+03:00").getTime();
 
 
   function updateCountdown() {
@@ -253,37 +226,37 @@ document.addEventListener("DOMContentLoaded", () => {
       difference = 0;
     }
 
-    const days = Math.floor(
+    const d = Math.floor(
       difference / (1000 * 60 * 60 * 24)
     );
 
-    const hours = Math.floor(
+    const h = Math.floor(
       (difference / (1000 * 60 * 60)) % 24
     );
 
-    const minutes = Math.floor(
+    const m = Math.floor(
       (difference / (1000 * 60)) % 60
     );
 
-    const seconds = Math.floor(
+    const s = Math.floor(
       (difference / 1000) % 60
     );
 
 
-    if (daysEl) {
-      daysEl.textContent = String(days).padStart(2, "0");
+    if (days) {
+      days.textContent = String(d).padStart(2, "0");
     }
 
-    if (hoursEl) {
-      hoursEl.textContent = String(hours).padStart(2, "0");
+    if (hours) {
+      hours.textContent = String(h).padStart(2, "0");
     }
 
-    if (minutesEl) {
-      minutesEl.textContent = String(minutes).padStart(2, "0");
+    if (minutes) {
+      minutes.textContent = String(m).padStart(2, "0");
     }
 
-    if (secondsEl) {
-      secondsEl.textContent = String(seconds).padStart(2, "0");
+    if (seconds) {
+      seconds.textContent = String(s).padStart(2, "0");
     }
   }
 
@@ -297,56 +270,49 @@ document.addEventListener("DOMContentLoaded", () => {
      FIREWORKS
   ========================= */
 
-  const ringsSection = document.querySelector(".rings");
+  const ringsScene = document.getElementById("ringsScene");
+  const fireworks = document.getElementById("fireworks");
 
   let fireworksStarted = false;
 
 
-  function createFirework() {
-
-    const container =
-      document.querySelector(".fireworks") ||
-      document.querySelector(".rings");
-
-    if (!container) return;
-
-    const firework = document.createElement("div");
-
-    firework.className = "firework";
-
-    const x = Math.random() * 90 + 5;
-    const y = Math.random() * 45 + 5;
-
-    firework.style.left = x + "%";
-    firework.style.top = y + "%";
-
-    container.appendChild(firework);
-
-    setTimeout(() => {
-      firework.remove();
-    }, 1800);
-  }
-
-
   function startFireworks() {
 
-    if (fireworksStarted) return;
+    if (fireworksStarted || !fireworks) return;
 
     fireworksStarted = true;
 
-    for (let i = 0; i < 8; i++) {
+    fireworks.classList.add("show");
 
-      setTimeout(() => {
-        createFirework();
-      }, i * 350);
+    const bursts = fireworks.querySelectorAll(".burst");
 
+    bursts.forEach((burst, index) => {
+
+      burst.style.animationDelay =
+        `${index * 0.25}s`;
+
+    });
+
+
+    /* محاولة تشغيل صوت الألعاب النارية */
+
+    const fireworkSound =
+      document.getElementById("fireworkSound");
+
+    if (fireworkSound) {
+
+      fireworkSound.volume = 0.35;
+
+      fireworkSound.currentTime = 0;
+
+      fireworkSound.play().catch(() => {});
     }
   }
 
 
-  if (ringsSection && "IntersectionObserver" in window) {
+  if (ringsScene && "IntersectionObserver" in window) {
 
-    const fireworkObserver = new IntersectionObserver(
+    const ringObserver = new IntersectionObserver(
       (entries) => {
 
         entries.forEach((entry) => {
@@ -363,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     );
 
-    fireworkObserver.observe(ringsSection);
+    ringObserver.observe(ringsScene);
   }
 
 
@@ -371,75 +337,37 @@ document.addEventListener("DOMContentLoaded", () => {
      AUTO SCROLL
   ========================= */
 
-  const sections = Array.from(
-    document.querySelectorAll(
-      "[data-stop], section, .scene"
-    )
+  const scenes = Array.from(
+    document.querySelectorAll("[data-stop]")
   );
 
 
   function sleep(ms) {
-
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(resolve, ms);
     });
-
   }
 
 
-  function getScrollTargets() {
+  function scrollToPosition(target) {
 
-    const targets = [];
-
-    sections.forEach((section) => {
-
-      const rect = section.getBoundingClientRect();
-
-      const absoluteTop =
-        window.scrollY + rect.top;
-
-      if (
-        !targets.some(
-          (value) => Math.abs(value - absoluteTop) < 100
-        )
-      ) {
-        targets.push(absoluteTop);
-      }
-
-    });
-
-    return targets.sort((a, b) => a - b);
-  }
-
-
-  function smoothScrollTo(target) {
-
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
 
       const start = window.scrollY;
-
       const distance = target - start;
 
-      if (Math.abs(distance) < 5) {
-        resolve();
-        return;
-      }
-
       const duration =
-        Math.min(
-          10000,
-          Math.max(
-            3000,
-            Math.abs(distance) * SCROLL_SPEED
-          )
+        Math.max(
+          3000,
+          Math.min(8500, Math.abs(distance) * 12)
         );
 
       const startTime = performance.now();
 
 
-      function step(currentTime) {
+      function animate(currentTime) {
 
-        if (autoScrollStopped) {
+        if (stopAutoScroll) {
           resolve();
           return;
         }
@@ -450,14 +378,16 @@ document.addEventListener("DOMContentLoaded", () => {
         let progress =
           Math.min(elapsed / duration, 1);
 
-        /*
-          ease-in-out
-        */
+
+        /* Smooth easing */
 
         progress =
           progress < 0.5
             ? 2 * progress * progress
-            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+            : 1 - Math.pow(
+                -2 * progress + 2,
+                2
+              ) / 2;
 
 
         window.scrollTo(
@@ -468,19 +398,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (progress < 1) {
 
-          requestAnimationFrame(step);
+          requestAnimationFrame(animate);
 
         } else {
 
           resolve();
-
         }
-
       }
 
 
-      requestAnimationFrame(step);
-
+      requestAnimationFrame(animate);
     });
   }
 
@@ -490,63 +417,64 @@ document.addEventListener("DOMContentLoaded", () => {
     if (autoScrolling) return;
 
     autoScrolling = true;
-    autoScrollStopped = false;
+    stopAutoScroll = false;
 
-    if (autoScrollBtn) {
-      autoScrollBtn.innerHTML = "STOP AUTO SCROLL";
-      autoScrollBtn.classList.add("active");
+    if (autoBtn) {
+      autoBtn.textContent = "STOP AUTO SCROLL";
     }
 
 
-    const targets = getScrollTargets();
+    for (const scene of scenes) {
 
-    for (let i = 0; i < targets.length; i++) {
+      if (stopAutoScroll) break;
 
-      if (autoScrollStopped) break;
+      const rect =
+        scene.getBoundingClientRect();
 
-      const target = targets[i];
+      const target =
+        window.scrollY + rect.top;
+
 
       if (target <= window.scrollY + 100) {
         continue;
       }
 
-      await smoothScrollTo(target);
 
-      if (autoScrollStopped) break;
+      await scrollToPosition(target);
 
-      await sleep(PAUSE_TIME);
+
+      if (stopAutoScroll) break;
+
+
+      await sleep(PAUSE_BETWEEN_SCENES);
     }
 
 
     autoScrolling = false;
 
-    if (autoScrollBtn) {
-      autoScrollBtn.innerHTML = "AUTO SCROLL";
-      autoScrollBtn.classList.remove("active");
+    if (autoBtn) {
+      autoBtn.textContent = "AUTO SCROLL";
     }
   }
 
 
-  function stopAutoScroll() {
+  function stopScrolling() {
 
-    if (!autoScrolling) return;
-
-    autoScrollStopped = true;
+    stopAutoScroll = true;
     autoScrolling = false;
 
-    if (autoScrollBtn) {
-      autoScrollBtn.innerHTML = "AUTO SCROLL";
-      autoScrollBtn.classList.remove("active");
+    if (autoBtn) {
+      autoBtn.textContent = "AUTO SCROLL";
     }
   }
 
 
-  if (autoScrollBtn) {
+  if (autoBtn) {
 
-    autoScrollBtn.addEventListener("click", () => {
+    autoBtn.addEventListener("click", () => {
 
       if (autoScrolling) {
-        stopAutoScroll();
+        stopScrolling();
       } else {
         startAutoScroll();
       }
@@ -556,95 +484,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================
-     STOP AUTO SCROLL WHEN USER
-     MANUALLY SCROLLS
-  ========================= */
-
-  let manualScrollTimer = null;
-
-  function detectManualScroll() {
-
-    if (!autoScrolling) return;
-
-    clearTimeout(manualScrollTimer);
-
-    manualScrollTimer = setTimeout(() => {
-
-      if (autoScrolling) {
-        stopAutoScroll();
-      }
-
-    }, 100);
-  }
-
-
-  window.addEventListener(
-    "wheel",
-    detectManualScroll,
-    {
-      passive: true
-    }
-  );
-
-
-  window.addEventListener(
-    "touchmove",
-    detectManualScroll,
-    {
-      passive: true
-    }
-  );
-
-
-  /* =========================
      GUEST MESSAGE
   ========================= */
 
-  const guestForm =
-    document.querySelector(".guest-form") ||
-    document.querySelector("form");
+  const messageForm =
+    document.getElementById("messageForm");
+
+  const formResult =
+    document.getElementById("formResult");
 
 
-  if (guestForm) {
+  if (messageForm) {
 
-    guestForm.addEventListener("submit", (event) => {
+    messageForm.addEventListener(
+      "submit",
+      (event) => {
 
-      event.preventDefault();
+        event.preventDefault();
 
-      const button =
-        guestForm.querySelector(
-          'button[type="submit"]'
-        );
+        const name =
+          document.getElementById("guestName");
 
-      if (button) {
+        if (formResult) {
 
-        const originalText =
-          button.textContent;
+          formResult.textContent =
+            `Thank you ${name.value} ♥`;
 
-        button.textContent =
-          "THANK YOU ♥";
+        }
 
-        button.disabled = true;
-
-
-        setTimeout(() => {
-
-          button.textContent =
-            originalText;
-
-          button.disabled = false;
-
-          guestForm.reset();
-
-        }, 2500);
+        messageForm.reset();
       }
-
-    });
+    );
   }
 
 
   /* =========================
-     INITIAL STATE
+     INITIAL
   ========================= */
 
   updateMusicButton();
