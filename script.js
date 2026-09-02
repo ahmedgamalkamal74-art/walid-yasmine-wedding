@@ -40,6 +40,9 @@ const seconds =
 const ringsSection =
   document.getElementById("rings-section");
 
+const invitationGlow =
+  document.querySelector(".invitation-glow");
+
 
 /* =================================
    STATE
@@ -87,11 +90,6 @@ async function openInvitation() {
 
   } catch (error) {
 
-    /*
-      Browser may block autoplay.
-      The music button remains available.
-    */
-
     console.log(
       "Music autoplay was blocked."
     );
@@ -100,8 +98,9 @@ async function openInvitation() {
 
 
   /*
-    Give the envelope enough time to open
-    before revealing the invitation.
+    Give the envelope enough time
+    to open before revealing
+    the invitation.
   */
 
   setTimeout(() => {
@@ -114,8 +113,7 @@ async function openInvitation() {
 
 
   /*
-    Start the gentle automatic journey
-    after the opening transition.
+    Start automatic journey.
   */
 
   setTimeout(() => {
@@ -202,7 +200,9 @@ function updateCountdown() {
 
 
   const totalSeconds =
-    Math.floor(difference / 1000);
+    Math.floor(
+      difference / 1000
+    );
 
 
   const d =
@@ -251,6 +251,51 @@ setInterval(
 
 
 /* =================================
+   SECTION REVEAL
+================================= */
+
+const sections =
+  document.querySelectorAll(
+    "#invitation > .section"
+  );
+
+
+const sectionObserver =
+  new IntersectionObserver(
+
+    (entries) => {
+
+      entries.forEach((entry) => {
+
+        if (
+          entry.isIntersecting
+        ) {
+
+          entry.target.classList.add(
+            "visible"
+          );
+
+        }
+
+      });
+
+    },
+
+    {
+      threshold: 0.18
+    }
+
+  );
+
+
+sections.forEach((section) => {
+
+  sectionObserver.observe(section);
+
+});
+
+
+/* =================================
    RINGS ANIMATION
 ================================= */
 
@@ -295,6 +340,88 @@ ringsObserver.observe(
 
 
 /* =================================
+   SCROLL LIGHT
+================================= */
+
+let lightTicking = false;
+
+function updateScrollLight() {
+
+  if (!invitationGlow) return;
+
+  const scrollY =
+    window.scrollY || window.pageYOffset;
+
+  const movement =
+    Math.min(
+      scrollY * 0.18,
+      900
+    );
+
+  invitationGlow.style.transform =
+    `translate(-50%, calc(-50% + ${movement}px))`;
+
+  /*
+    Move the small ambient lights
+    in each section slightly with
+    the page position.
+  */
+
+  document
+    .querySelectorAll(".ambient-light")
+    .forEach((light) => {
+
+      const rect =
+        light.parentElement.getBoundingClientRect();
+
+      const viewportCenter =
+        window.innerHeight / 2;
+
+      const distance =
+        rect.top +
+        rect.height / 2 -
+        viewportCenter;
+
+      const offset =
+        Math.max(
+          -45,
+          Math.min(
+            45,
+            distance * -0.06
+          )
+        );
+
+      light.style.transform =
+        `translate(-50%, calc(-50% + ${offset}px))`;
+
+    });
+
+  lightTicking = false;
+}
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (!lightTicking) {
+
+      window.requestAnimationFrame(
+        updateScrollLight
+      );
+
+      lightTicking = true;
+
+    }
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+/* =================================
    USER INTERACTION
 ================================= */
 
@@ -306,8 +433,7 @@ function pauseAutoScroll() {
 
   /*
     Once the visitor manually scrolls,
-    the automatic journey is cancelled.
-    The visitor remains fully in control.
+    automatic journey is cancelled.
   */
 
   autoScrollCancelled = true;
@@ -402,6 +528,7 @@ async function startAutoScroll() {
 
   autoScrollStarted = true;
 
+
   /*
     Let the user see the hero first.
   */
@@ -417,7 +544,7 @@ async function startAutoScroll() {
   }
 
 
-  const sections =
+  const autoSections =
     Array.from(
       document.querySelectorAll(
         "#invitation > .section"
@@ -427,12 +554,12 @@ async function startAutoScroll() {
 
   /*
     Start from the second section
-    because the hero is already visible.
+    because hero is already visible.
   */
 
   for (
     let index = 1;
-    index < sections.length;
+    index < autoSections.length;
     index++
   ) {
 
@@ -445,7 +572,7 @@ async function startAutoScroll() {
 
 
     const section =
-      sections[index];
+      autoSections[index];
 
 
     section.scrollIntoView({
@@ -458,8 +585,7 @@ async function startAutoScroll() {
 
 
     /*
-      Rings get extra time so the
-      animation can be appreciated.
+      Rings get extra time.
     */
 
     if (
