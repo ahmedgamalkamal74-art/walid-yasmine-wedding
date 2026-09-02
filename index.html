@@ -1,1 +1,304 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Walid & Yasmine | Wedding Invitation</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body class="locked"><audio id="music" src="music.mp3" loop></audio><div id="opening"><div id="quran"><div class="card"><span>✦</span><p>﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾</p><small>سورة الروم · ٢١</small></div></div><div id="envelope" class="hidden"><div class="names">WALID &amp; YASMINE</div><button id="open"><span class="paper">W <i>&amp;</i> Y<small>13 · 09 · 2026</small></span><span class="flap"></span><b>W&amp;Y</b></button><p>TAP TO OPEN</p></div></div><header id="top"><button id="musicBtn">♫ الموسيقى</button><button id="autoBtn">AUTO SCROLL</button></header><main><section class="hero stop"><div class="bg"></div><div class="shade"></div><div class="center reveal"><small>WITH ALL OUR HEARTS</small><h1>Walid <i>&amp;</i> Yasmine</h1><p>WE'RE GETTING MARRIED</p><b>13 SEPTEMBER 2026 · 7:00 PM</b></div></section><section class="scene stop chandelier"><div class="photo"></div><div class="center reveal"><small>A NIGHT TO REMEMBER</small><h2>The celebration begins</h2><p>ليلة جميلة تجمعنا مع من نحب، ونبدأ فيها فصلًا جديدًا من حكايتنا.</p></div></section><section class="scene stop countdown"><div class="garland"></div><div class="center reveal"><small>COUNTING THE MOMENTS</small><h2>Until our forever</h2><div class="timer"><span><b id="days">00</b>DAYS</span><span><b id="hours">00</b>HOURS</span><span><b id="minutes">00</b>MINUTES</span><span><b id="seconds">00</b>SECONDS</span></div></div></section><section class="scene stop rings"><div class="sky"></div><canvas id="fireworks"></canvas><div class="ring a"></div><div class="ring b"></div><div class="center reveal"><small>TWO HEARTS · ONE PROMISE</small><h2>Our story, together</h2><p>وعندما تلتقي الخواتم، تبدأ الحكاية التي نريد أن نكملها معكم.</p></div></section><section class="content stop"><div class="inner reveal"><small>THE DETAILS</small><h2>كل التفاصيل التي ننتظرها معكم</h2><div class="details"><div><b>DATE</b><strong>Sunday</strong><p>13 September 2026</p></div><div><b>TIME</b><strong>7:00 PM</strong><p>Reception</p></div><div><b>VENUE</b><strong>Lavendola</strong><p>Tiba Rose Hotel · New Cairo</p></div></div><a href="https://maps.app.goo.gl/3LwrwyuWPGNcZtKw9?g_st=ac" target="_blank">VIEW LOCATION ↗</a></div></section><section class="content stop"><div class="inner reveal"><small>THE EVENING</small><h2>لحظات الليلة</h2><div class="timeline"><p><b>07:00</b> WELCOME<br><small>Guests arrive</small></p><p><b>08:00</b> THE CELEBRATION<br><small>Let the moments begin</small></p><p><b>09:00</b> DINNER &amp; MUSIC<br><small>A beautiful evening together</small></p></div></div></section><section class="content stop"><div class="inner reveal"><small>A MESSAGE FOR US</small><h2>كلمة منكم تهمنا</h2><p>وجودكم هو أجمل جزء في يومنا، ولو حابين تسيبوا لنا كلمة هتفضل ذكرى جميلة.</p><form id="form"><input required placeholder="Your Name"><textarea required placeholder="Write us a lovely message..."></textarea><button>SEND WITH LOVE ♡</button></form><div id="result"></div></div></section><section class="final"><div class="shade"></div><div class="center reveal"><small>FOREVER STARTS HERE</small><h2>We can't wait to celebrate with you</h2><h1>Walid <i>&amp;</i> Yasmine</h1><b>13 · 09 · 2026</b></div></section></main><script src="script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Walid & Yasmine | Wedding Invitation</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ================= OPENING SCREEN ================= -->
+  <section id="opening" class="opening">
+
+    <div class="stars"></div>
+
+    <div class="opening-lights">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="envelope-wrap">
+
+      <div class="envelope" id="envelope">
+
+        <div class="envelope-flap"></div>
+
+        <div class="envelope-front">
+          <div class="wax-seal">W ♥ Y</div>
+        </div>
+
+      </div>
+
+      <div class="opening-text">
+        <p class="small-title">THE WEDDING OF</p>
+
+        <h1>Walid <span>&</span> Yasmine</h1>
+
+        <p>Welcome to our celebration</p>
+
+        <button id="openBtn">
+          Open Invitation
+        </button>
+
+        <small>
+          Tap to enter & enjoy the music
+        </small>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= MAIN INVITATION ================= -->
+
+  <main id="invitation" class="invitation">
+
+    <!-- decorative chandelier -->
+    <div class="chandelier chandelier-left">
+      <div class="chain"></div>
+      <div class="lamp"></div>
+      <div class="lamp-glow"></div>
+    </div>
+
+    <div class="chandelier chandelier-right">
+      <div class="chain"></div>
+      <div class="lamp"></div>
+      <div class="lamp-glow"></div>
+    </div>
+
+    <!-- hanging lights -->
+    <div class="light-chain top-chain">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="section hero">
+
+      <div class="gold-particles"></div>
+
+      <div class="hero-content">
+
+        <p class="eyebrow">TOGETHER WITH THEIR FAMILIES</p>
+
+        <h2>
+          Walid
+          <span>&</span>
+          Yasmine
+        </h2>
+
+        <div class="ornament">
+          <i></i>
+          <b>♥</b>
+          <i></i>
+        </div>
+
+        <p class="invite-text">
+          Joyfully invite you to celebrate
+          the beginning of their beautiful journey together.
+        </p>
+
+        <div class="date-card">
+
+          <div>
+            <strong>13</strong>
+            <span>SEPTEMBER</span>
+            <small>2026</small>
+          </div>
+
+          <div class="divider"></div>
+
+          <div>
+            <strong>7:00</strong>
+            <span>PM</span>
+            <small>Sunday</small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= COUNTDOWN ================= -->
+
+    <section class="section countdown-section">
+
+      <p class="section-label">THE BIG DAY</p>
+
+      <h3>Counting Down To Forever</h3>
+
+      <div id="countdown" class="countdown">
+
+        <div class="count-box">
+          <strong id="days">00</strong>
+          <span>DAYS</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="hours">00</strong>
+          <span>HOURS</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="minutes">00</strong>
+          <span>MINUTES</span>
+        </div>
+
+        <div class="count-box">
+          <strong id="seconds">00</strong>
+          <span>SECONDS</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= LOVE SECTION ================= -->
+
+    <section class="section love-section">
+
+      <div class="ring-decoration ring-one"></div>
+      <div class="ring-decoration ring-two"></div>
+
+      <p class="section-label">OUR STORY</p>
+
+      <h3>Two Hearts, One Beautiful Journey</h3>
+
+      <div class="heart-symbol">♥</div>
+
+      <p class="arabic-text">
+        بدأت الحكاية بلحظة،
+        وكبرت مع الأيام إلى أن أصبحت أجمل قرار في حياتنا.
+      </p>
+
+      <p class="english-quote">
+        Two souls, one heart,
+        and a lifetime of beautiful memories ahead.
+      </p>
+
+    </section>
+
+
+    <!-- ================= CEREMONY ================= -->
+
+    <section class="section ceremony-section">
+
+      <p class="section-label">SAVE THE DATE</p>
+
+      <h3>Join Us On Our Special Day</h3>
+
+      <div class="event-card">
+
+        <div class="event-icon">
+          ♡
+        </div>
+
+        <h4>Wedding Celebration</h4>
+
+        <p>Sunday, September 13th, 2026</p>
+
+        <strong>7:00 PM</strong>
+
+        <div class="event-line"></div>
+
+        <p class="arabic-text">
+          يسعدنا وجودكم ومشاركتكم أجمل لحظاتنا.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= FIREWORKS ================= -->
+
+    <section class="section fireworks-section">
+
+      <canvas id="fireworks"></canvas>
+
+      <div class="fireworks-content">
+
+        <p class="section-label">A NEW CHAPTER</p>
+
+        <h3>
+          Let The Celebration Begin
+        </h3>
+
+        <div class="firework-heart">♥</div>
+
+        <p>
+          Here's to love, laughter,
+          and a lifetime together.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= FINAL ================= -->
+
+    <section class="section final-section">
+
+      <div class="final-decoration">
+        <span>✦</span>
+        <span>♥</span>
+        <span>✦</span>
+      </div>
+
+      <p class="section-label">
+        WITH LOVE
+      </p>
+
+      <h3>
+        Walid & Yasmine
+      </h3>
+
+      <p>
+        Thank you for being part of our special day.
+      </p>
+
+      <div class="final-date">
+        13 • 09 • 2026
+      </div>
+
+      <div class="rings">
+        <div class="ring"></div>
+        <div class="ring"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- MUSIC -->
+
+  <audio id="music" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicBtn" class="music-btn">
+    ♫
+  </button>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
