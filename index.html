@@ -1,26 +1,612 @@
-<!-- Elegant Chandelier Background -->
-<div class="chandelier-bg" aria-hidden="true">
-  <div class="chandelier-chain"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <div class="chandelier">
-    <div class="chandelier-top"></div>
+  <title>Walid & Yasmin | Wedding Invitation</title>
 
-    <div class="chandelier-arm arm-1"></div>
-    <div class="chandelier-arm arm-2"></div>
-    <div class="chandelier-arm arm-3"></div>
-    <div class="chandelier-arm arm-4"></div>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <div class="chandelier-light light-1"></div>
-    <div class="chandelier-light light-2"></div>
-    <div class="chandelier-light light-3"></div>
-    <div class="chandelier-light light-4"></div>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap"
+    rel="stylesheet"
+  >
 
-    <div class="chandelier-crystal crystal-1"></div>
-    <div class="chandelier-crystal crystal-2"></div>
-    <div class="chandelier-crystal crystal-3"></div>
-    <div class="chandelier-crystal crystal-4"></div>
-  </div>
-</div>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-<div class="gold-glow" aria-hidden="true"></div>
-<div class="floating-sparkles" aria-hidden="true"></div>
+<body class="locked">
+
+  <!-- =========================
+       OPENING
+  ========================== -->
+
+  <section id="welcome" class="welcome">
+
+    <div class="gold-particles"></div>
+
+    <div class="opening-floral floral-left" aria-hidden="true">
+      <span></span>
+      <i>✿</i>
+      <i>✿</i>
+      <i>✿</i>
+      <i>✿</i>
+    </div>
+
+    <div class="opening-floral floral-right" aria-hidden="true">
+      <span></span>
+      <i>✿</i>
+      <i>✿</i>
+      <i>✿</i>
+      <i>✿</i>
+    </div>
+
+    <div class="welcome-content">
+
+      <!-- Envelope only -->
+      <div class="envelope-wrapper">
+
+        <button
+          id="envelopeButton"
+          class="envelope-button"
+          aria-label="Open wedding invitation"
+          type="button"
+        >
+
+          <div class="envelope">
+
+            <div class="envelope-back"></div>
+
+            <div class="letter">
+              <div class="letter-monogram">
+                W <span>&</span> Y
+              </div>
+            </div>
+
+            <div class="envelope-flap"></div>
+
+            <div class="envelope-front"></div>
+
+            <div class="wax-seal" aria-hidden="true">
+              <span>W</span>
+              <b>&</b>
+              <span>Y</span>
+            </div>
+
+          </div>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       INVITATION
+  ========================== -->
+
+  <main id="invitation">
+
+    <!-- HERO -->
+
+    <section class="hero section">
+
+      <!-- Elegant Chandelier Background -->
+
+      <div class="chandelier-bg" aria-hidden="true">
+
+        <div class="chandelier-chain"></div>
+
+        <div class="chandelier">
+
+          <div class="chandelier-top"></div>
+
+          <div class="chandelier-arm arm-1"></div>
+          <div class="chandelier-arm arm-2"></div>
+          <div class="chandelier-arm arm-3"></div>
+          <div class="chandelier-arm arm-4"></div>
+
+          <div class="chandelier-light light-1"></div>
+          <div class="chandelier-light light-2"></div>
+          <div class="chandelier-light light-3"></div>
+          <div class="chandelier-light light-4"></div>
+
+          <div class="chandelier-crystal crystal-1"></div>
+          <div class="chandelier-crystal crystal-2"></div>
+          <div class="chandelier-crystal crystal-3"></div>
+          <div class="chandelier-crystal crystal-4"></div>
+
+        </div>
+
+      </div>
+
+      <div class="gold-glow" aria-hidden="true"></div>
+      <div class="floating-sparkles" aria-hidden="true"></div>
+
+
+      <div class="leaf-decoration leaf-one" aria-hidden="true">
+        ❧
+      </div>
+
+      <div class="leaf-decoration leaf-two" aria-hidden="true">
+        ❧
+      </div>
+
+
+      <div class="section-inner">
+
+        <p class="eyebrow">
+          A BEAUTIFUL BEGINNING
+        </p>
+
+        <div class="hero-names">
+          Walid & Yasmin
+        </div>
+
+        <div class="gold-line">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <p class="hero-title">
+          WE ARE GETTING MARRIED
+        </p>
+
+        <h1>
+          And We Would Love<br>
+          For You To Be There
+        </h1>
+
+        <p class="hero-date">
+          13 SEPTEMBER 2026
+        </p>
+
+        <p class="hero-time">
+          7:00 PM
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- COUNTDOWN -->
+
+    <section class="countdown-section section">
+
+      <div class="soft-leaf soft-left" aria-hidden="true">
+        ❧
+      </div>
+
+      <div class="soft-leaf soft-right" aria-hidden="true">
+        ❧
+      </div>
+
+      <div class="section-inner">
+
+        <p class="eyebrow dark">
+          SAVE THE DATE
+        </p>
+
+        <h2>
+          The Countdown
+        </h2>
+
+        <div class="divider">
+          <span>✦</span>
+        </div>
+
+        <div class="countdown">
+
+          <div class="count-box">
+            <strong id="days">00</strong>
+            <small>DAYS</small>
+          </div>
+
+          <div class="count-box">
+            <strong id="hours">00</strong>
+            <small>HOURS</small>
+          </div>
+
+          <div class="count-box">
+            <strong id="minutes">00</strong>
+            <small>MINUTES</small>
+          </div>
+
+          <div class="count-box">
+            <strong id="seconds">00</strong>
+            <small>SECONDS</small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- LOVE STORY / RINGS -->
+
+    <section
+      id="rings-section"
+      class="story-section section"
+    >
+
+      <div class="story-decoration story-left" aria-hidden="true">
+        ❧
+      </div>
+
+      <div class="story-decoration story-right" aria-hidden="true">
+        ❧
+      </div>
+
+      <div class="section-inner story-inner">
+
+        <div class="story-copy">
+
+          <p class="eyebrow">
+            TWO HEARTS
+          </p>
+
+          <h2>
+            One Beautiful<br>
+            Journey
+          </h2>
+
+          <p>
+            Two hearts, two souls,<br>
+            one forever.
+          </p>
+
+        </div>
+
+        <div class="ring-stage">
+
+          <div class="ring ring-left">
+            <span class="diamond"></span>
+          </div>
+
+          <div class="ring ring-right">
+            <span class="diamond"></span>
+          </div>
+
+          <div class="ring-sparkles" aria-hidden="true">
+            ✦
+          </div>
+
+        </div>
+
+        <div class="story-names">
+          WALID & YASMIN
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MESSAGE -->
+
+    <section class="message-section section">
+
+      <div class="section-inner message-inner">
+
+        <p class="eyebrow dark">
+          WITH LOVE
+        </p>
+
+        <h2>
+          You Are Invited
+        </h2>
+
+        <div class="divider">
+          <span>♡</span>
+        </div>
+
+        <p class="message">
+          With hearts full of love and happiness,
+          we invite you to join us as we begin
+          our forever together.
+        </p>
+
+        <p class="message">
+          Your presence will make our special day
+          even more beautiful and meaningful.
+        </p>
+
+        <div class="signature">
+          With love,
+          <strong>Walid & Yasmin</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DETAILS -->
+
+    <section class="details-section section">
+
+      <div class="section-inner">
+
+        <p class="eyebrow dark">
+          THE DETAILS
+        </p>
+
+        <h2>
+          Our Special Day
+        </h2>
+
+        <div class="divider">
+          <span>✦</span>
+        </div>
+
+        <div class="details-grid">
+
+          <div class="detail-card">
+
+            <div class="detail-symbol">
+              ♡
+            </div>
+
+            <p class="detail-label">
+              DATE
+            </p>
+
+            <h3>
+              Sunday
+            </h3>
+
+            <p>
+              13 September 2026
+            </p>
+
+          </div>
+
+
+          <div class="detail-card">
+
+            <div class="detail-symbol">
+              ◷
+            </div>
+
+            <p class="detail-label">
+              TIME
+            </p>
+
+            <h3>
+              7:00 PM
+            </h3>
+
+            <p>
+              Reception & Celebration
+            </p>
+
+          </div>
+
+
+          <div class="detail-card">
+
+            <div class="detail-symbol">
+              ❧
+            </div>
+
+            <p class="detail-label">
+              DRESS CODE
+            </p>
+
+            <h3>
+              Elegant
+            </h3>
+
+            <p>
+              Come dressed to celebrate
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- VENUE -->
+
+    <section class="venue-section section">
+
+      <div class="venue-leaves venue-left" aria-hidden="true">
+        ❧
+      </div>
+
+      <div class="venue-leaves venue-right" aria-hidden="true">
+        ❧
+      </div>
+
+      <div class="section-inner">
+
+        <p class="eyebrow">
+          THE VENUE
+        </p>
+
+        <h2>
+          Tiba Rose Hotel
+        </h2>
+
+        <!-- Hall Name -->
+        <p class="venue-hall">
+          Lavendola
+        </p>
+
+        <div class="gold-line">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <p class="venue-text">
+          We would be delighted to celebrate
+          this unforgettable evening with you
+          at Tiba Rose Hotel.
+        </p>
+
+        <p class="venue-name">
+          TIBA ROSE HOTEL
+        </p>
+
+        <a
+          href="https://maps.app.goo.gl/3LwrwyuWPGNcZtKw9?g_st=ac"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="maps-button"
+        >
+          VIEW LOCATION
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- CELEBRATION -->
+
+    <section class="celebration-section section">
+
+      <div class="section-inner">
+
+        <p class="eyebrow">
+          LET'S CELEBRATE
+        </p>
+
+        <h2>
+          A Night To Remember
+        </h2>
+
+        <div class="divider">
+          <span>♡</span>
+        </div>
+
+        <div class="timeline">
+
+          <div class="timeline-item">
+
+            <span>01</span>
+
+            <div>
+              <small>WELCOME</small>
+              <strong>7:00 PM</strong>
+            </div>
+
+          </div>
+
+
+          <div class="timeline-item">
+
+            <span>02</span>
+
+            <div>
+              <small>DINNER & CELEBRATION</small>
+              <strong>8:00 PM</strong>
+            </div>
+
+          </div>
+
+
+          <div class="timeline-item">
+
+            <span>03</span>
+
+            <div>
+              <small>DANCE & JOY</small>
+              <strong>ALL NIGHT</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FINAL -->
+
+    <section class="final-section section">
+
+      <div class="final-jasmine final-left" aria-hidden="true">
+        ✿
+      </div>
+
+      <div class="final-jasmine final-right" aria-hidden="true">
+        ✿
+      </div>
+
+      <div class="section-inner">
+
+        <p class="eyebrow">
+          WE CAN'T WAIT TO SEE YOU
+        </p>
+
+        <div class="final-names">
+          Walid & Yasmin
+        </div>
+
+        <div class="final-date">
+          13 · 09 · 2026
+        </div>
+
+        <div class="final-heart">
+          ♡
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <footer>
+
+      <p>
+        Made with love for Walid & Yasmin
+      </p>
+
+      <span>
+        2026
+      </span>
+
+    </footer>
+
+  </main>
+
+
+  <!-- MUSIC -->
+
+  <audio id="weddingMusic" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+
+  <button
+    id="musicButton"
+    class="music-button"
+    aria-label="Toggle music"
+    type="button"
+  >
+    <span>♫</span>
+    <small>MUSIC</small>
+  </button>
+
+
+  <script src="script.js"></script>
+
+</body>
+  </html>
