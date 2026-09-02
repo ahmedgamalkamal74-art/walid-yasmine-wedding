@@ -1,613 +1,216 @@
-/* =================================
-   WEDDING DATE
-================================= */
+/* =========================
+   ENVELOPE
+========================= */
 
-const weddingDate =
-  new Date("2026-09-13T19:00:00+03:00");
-
-
-/* =================================
-   ELEMENTS
-================================= */
-
-const welcome =
-  document.getElementById("welcome");
+const envelopeWrapper =
+  document.getElementById("envelope");
 
 const envelope =
   document.querySelector(".envelope");
 
-const envelopeButton =
-  document.getElementById("envelopeButton");
+const opening =
+  document.getElementById("opening");
+
+const website =
+  document.getElementById("website");
 
 const music =
   document.getElementById("weddingMusic");
 
-const musicButton =
-  document.getElementById("musicButton");
 
-const days =
-  document.getElementById("days");
-
-const hours =
-  document.getElementById("hours");
-
-const minutes =
-  document.getElementById("minutes");
-
-const seconds =
-  document.getElementById("seconds");
-
-const ringsSection =
-  document.getElementById("rings-section");
-
-const invitationGlow =
-  document.querySelector(".invitation-glow");
-
-
-/* =================================
-   STATE
-================================= */
-
-let invitationOpened = false;
-let ringsAnimated = false;
-
-let autoScrollStarted = false;
-let autoScrollCancelled = false;
-
-let userInteracting = false;
-let interactionTimer = null;
-
-
-/* =================================
-   OPEN INVITATION
-================================= */
-
-async function openInvitation() {
-
-  if (invitationOpened) return;
-
-  invitationOpened = true;
-
-  /* Open envelope */
+envelopeWrapper.addEventListener("click", () => {
 
   envelope.classList.add("open");
 
-  envelopeButton.classList.add("opened");
-
-  envelopeButton.setAttribute(
-    "aria-label",
-    "Wedding invitation opened"
-  );
-
-
-  /* Start music */
-
-  try {
-
-    await music.play();
-
-    musicButton.classList.add("playing");
-
-  } catch (error) {
-
-    console.log(
-      "Music autoplay was blocked."
-    );
-
-  }
-
-
   /*
-    Give the envelope enough time
-    to open before revealing
-    the invitation.
+    Optional music.
+    If you add assets/music.mp3,
+    it will start after the user taps.
   */
+
+  if (music) {
+    music.volume = 0.35;
+
+    music.play().catch(() => {});
+  }
 
   setTimeout(() => {
 
-    welcome.classList.add("opened");
+    opening.classList.add("hide");
 
     document.body.classList.remove("locked");
 
-  }, 1550);
+  }, 1300);
+
+});
 
 
-  /*
-    Start automatic journey.
-  */
-
-  setTimeout(() => {
-
-    startAutoScroll();
-
-  }, 3000);
-
-}
-
-
-/* =================================
-   ENVELOPE CLICK
-================================= */
-
-envelopeButton.addEventListener(
-  "click",
-  openInvitation
-);
-
-
-/* =================================
-   MUSIC
-================================= */
-
-musicButton.addEventListener(
-  "click",
-  async () => {
-
-    if (music.paused) {
-
-      try {
-
-        await music.play();
-
-        musicButton.classList.add(
-          "playing"
-        );
-
-      } catch (error) {
-
-        console.log(
-          "Music could not play."
-        );
-
-      }
-
-    } else {
-
-      music.pause();
-
-      musicButton.classList.remove(
-        "playing"
-      );
-
-    }
-
-  }
-);
-
-
-/* =================================
+/* =========================
    COUNTDOWN
-================================= */
+========================= */
+
+const weddingDate =
+  new Date("September 13, 2026 19:00:00").getTime();
+
 
 function updateCountdown() {
 
-  const now = new Date();
+  const now =
+    new Date().getTime();
 
-  const difference =
+  const distance =
     weddingDate - now;
 
 
-  if (difference <= 0) {
+  if (distance <= 0) {
 
-    days.textContent = "00";
-    hours.textContent = "00";
-    minutes.textContent = "00";
-    seconds.textContent = "00";
+    document.getElementById("days").innerText = "00";
+    document.getElementById("hours").innerText = "00";
+    document.getElementById("minutes").innerText = "00";
+    document.getElementById("seconds").innerText = "00";
 
     return;
-
   }
 
 
-  const totalSeconds =
+  const days =
     Math.floor(
-      difference / 1000
+      distance / (1000 * 60 * 60 * 24)
+    );
+
+  const hours =
+    Math.floor(
+      (distance %
+        (1000 * 60 * 60 * 24))
+      /
+      (1000 * 60 * 60)
+    );
+
+  const minutes =
+    Math.floor(
+      (distance %
+        (1000 * 60 * 60))
+      /
+      (1000 * 60)
+    );
+
+  const seconds =
+    Math.floor(
+      (distance %
+        (1000 * 60))
+      /
+      1000
     );
 
 
-  const d =
-    Math.floor(
-      totalSeconds / 86400
-    );
+  document.getElementById("days").innerText =
+    String(days).padStart(2, "0");
 
+  document.getElementById("hours").innerText =
+    String(hours).padStart(2, "0");
 
-  const h =
-    Math.floor(
-      (totalSeconds % 86400) / 3600
-    );
+  document.getElementById("minutes").innerText =
+    String(minutes).padStart(2, "0");
 
-
-  const m =
-    Math.floor(
-      (totalSeconds % 3600) / 60
-    );
-
-
-  const s =
-    totalSeconds % 60;
-
-
-  days.textContent =
-    String(d).padStart(2, "0");
-
-  hours.textContent =
-    String(h).padStart(2, "0");
-
-  minutes.textContent =
-    String(m).padStart(2, "0");
-
-  seconds.textContent =
-    String(s).padStart(2, "0");
-
+  document.getElementById("seconds").innerText =
+    String(seconds).padStart(2, "0");
 }
 
 
 updateCountdown();
 
-setInterval(
-  updateCountdown,
-  1000
-);
+setInterval(updateCountdown, 1000);
 
 
-/* =================================
-   SECTION REVEAL
-================================= */
+/* =========================
+   RINGS ANIMATION
+========================= */
 
-const sections =
-  document.querySelectorAll(
-    "#invitation > .section"
-  );
+const ringsSection =
+  document.getElementById("rings");
 
 
-const sectionObserver =
+const observer =
   new IntersectionObserver(
+    entries => {
 
-    (entries) => {
-
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
 
         if (
-          entry.isIntersecting
+          entry.isIntersecting &&
+          !entry.target.classList.contains("active")
         ) {
 
-          entry.target.classList.add(
-            "visible"
-          );
+          entry.target.classList.add("active");
 
         }
 
       });
 
     },
-
     {
-      threshold: 0.18
+      threshold: 0.55
     }
-
   );
 
 
-sections.forEach((section) => {
+observer.observe(ringsSection);
 
-  sectionObserver.observe(section);
+
+/* =========================
+   MESSAGE FORM
+========================= */
+
+const form =
+  document.querySelector(".message-form");
+
+
+form.addEventListener("submit", event => {
+
+  event.preventDefault();
+
+  alert(
+    "Thank you for your beautiful message ❤️"
+  );
+
+  form.reset();
 
 });
 
 
-/* =================================
-   RINGS ANIMATION
-================================= */
+/* =========================
+   PARALLAX CHANDELIER
+========================= */
 
-const ringsObserver =
-  new IntersectionObserver(
-
-    (entries) => {
-
-      entries.forEach((entry) => {
-
-        if (
-          entry.isIntersecting &&
-          !ringsAnimated
-        ) {
-
-          ringsAnimated = true;
-
-          ringsSection.classList.add(
-            "animate"
-          );
-
-          ringsObserver.unobserve(
-            ringsSection
-          );
-
-        }
-
-      });
-
-    },
-
-    {
-      threshold: 0.35
-    }
-
-  );
-
-
-ringsObserver.observe(
-  ringsSection
-);
-
-
-/* =================================
-   SCROLL LIGHT
-================================= */
-
-let lightTicking = false;
-
-function updateScrollLight() {
-
-  if (!invitationGlow) return;
-
-  const scrollY =
-    window.scrollY || window.pageYOffset;
-
-  const movement =
-    Math.min(
-      scrollY * 0.18,
-      900
-    );
-
-  invitationGlow.style.transform =
-    `translate(-50%, calc(-50% + ${movement}px))`;
-
-  /*
-    Move the small ambient lights
-    in each section slightly with
-    the page position.
-  */
-
-  document
-    .querySelectorAll(".ambient-light")
-    .forEach((light) => {
-
-      const rect =
-        light.parentElement.getBoundingClientRect();
-
-      const viewportCenter =
-        window.innerHeight / 2;
-
-      const distance =
-        rect.top +
-        rect.height / 2 -
-        viewportCenter;
-
-      const offset =
-        Math.max(
-          -45,
-          Math.min(
-            45,
-            distance * -0.06
-          )
-        );
-
-      light.style.transform =
-        `translate(-50%, calc(-50% + ${offset}px))`;
-
-    });
-
-  lightTicking = false;
-}
+const chandelier =
+  document.querySelector(".chandelier");
 
 
 window.addEventListener(
   "scroll",
   () => {
 
-    if (!lightTicking) {
+    const hero =
+      document.querySelector(".hero");
 
-      window.requestAnimationFrame(
-        updateScrollLight
-      );
+    if (!hero) return;
 
-      lightTicking = true;
+    const rect =
+      hero.getBoundingClientRect();
+
+    const progress =
+      -rect.top * 0.08;
+
+    if (
+      rect.bottom > 0 &&
+      rect.top < window.innerHeight
+    ) {
+
+      chandelier.style.marginTop =
+        `${progress}px`;
 
     }
 
   },
-  {
-    passive: true
-  }
+  { passive: true }
 );
-
-
-/* =================================
-   USER INTERACTION
-================================= */
-
-function pauseAutoScroll() {
-
-  if (!invitationOpened) return;
-
-  userInteracting = true;
-
-  /*
-    Once the visitor manually scrolls,
-    automatic journey is cancelled.
-  */
-
-  autoScrollCancelled = true;
-
-  clearTimeout(
-    interactionTimer
-  );
-
-
-  interactionTimer =
-    setTimeout(() => {
-
-      userInteracting = false;
-
-    }, 1500);
-
-}
-
-
-window.addEventListener(
-  "wheel",
-  pauseAutoScroll,
-  {
-    passive: true
-  }
-);
-
-
-window.addEventListener(
-  "touchstart",
-  pauseAutoScroll,
-  {
-    passive: true
-  }
-);
-
-
-window.addEventListener(
-  "pointerdown",
-  pauseAutoScroll,
-  {
-    passive: true
-  }
-);
-
-
-window.addEventListener(
-  "keydown",
-  (event) => {
-
-    const keys = [
-      "ArrowDown",
-      "ArrowUp",
-      "PageDown",
-      "PageUp",
-      " ",
-      "Home",
-      "End"
-    ];
-
-    if (keys.includes(event.key)) {
-
-      pauseAutoScroll();
-
-    }
-
-  }
-);
-
-
-/* =================================
-   WAIT
-================================= */
-
-function wait(ms) {
-
-  return new Promise(
-    resolve =>
-      setTimeout(resolve, ms)
-  );
-
-}
-
-
-/* =================================
-   AUTO SCROLL
-================================= */
-
-async function startAutoScroll() {
-
-  if (autoScrollStarted) return;
-
-  autoScrollStarted = true;
-
-
-  /*
-    Let the user see the hero first.
-  */
-
-  await wait(2500);
-
-
-  if (
-    autoScrollCancelled ||
-    userInteracting
-  ) {
-    return;
-  }
-
-
-  const autoSections =
-    Array.from(
-      document.querySelectorAll(
-        "#invitation > .section"
-      )
-    );
-
-
-  /*
-    Start from the second section
-    because hero is already visible.
-  */
-
-  for (
-    let index = 1;
-    index < autoSections.length;
-    index++
-  ) {
-
-    if (
-      autoScrollCancelled ||
-      userInteracting
-    ) {
-      return;
-    }
-
-
-    const section =
-      autoSections[index];
-
-
-    section.scrollIntoView({
-
-      behavior: "smooth",
-
-      block: "start"
-
-    });
-
-
-    /*
-      Rings get extra time.
-    */
-
-    if (
-      section.id === "rings-section"
-    ) {
-
-      await wait(7000);
-
-    } else {
-
-      await wait(4500);
-
-    }
-
-
-    if (
-      autoScrollCancelled ||
-      userInteracting
-    ) {
-      return;
-    }
-
-  }
-
-}
