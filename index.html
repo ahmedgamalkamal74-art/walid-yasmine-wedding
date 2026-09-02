@@ -9,49 +9,367 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="no-scroll">
+<body class="locked">
 
-  <!-- =========================
-       WELCOME / ENVELOPE
-  ========================== -->
+<!-- =========================
+     OPENING ENVELOPE
+========================= -->
 
-  <section id="welcome" class="welcome-screen">
+<section id="welcome" class="welcome">
 
-    <div class="welcome-background"></div>
+  <div class="stars"></div>
 
-    <div class="envelope-wrapper">
+  <div class="ornament ornament-left">❧</div>
+  <div class="ornament ornament-right">❧</div>
+
+  <div class="welcome-inner">
+
+    <div class="top-brand">
+      Walid & Yasmine
+    </div>
+
+    <div class="tiny-heart">♥</div>
+
+    <div class="envelope-wrap">
 
       <div class="envelope">
 
         <div class="envelope-back"></div>
 
+        <div class="letter">
+          <div class="letter-inner">
+            <span>W</span>
+            <span class="amp">&</span>
+            <span>Y</span>
+          </div>
+        </div>
+
         <div class="envelope-flap"></div>
 
         <div class="envelope-front"></div>
 
-        <div class="wax-seal">
+        <button id="sealButton" class="wax-seal" aria-label="Open invitation">
+          <span>W</span>
+          <b>&</b>
           <span>Y</span>
+        </button>
+
+      </div>
+
+    </div>
+
+    <p class="open-hint">CLICK THE SEAL TO OPEN</p>
+
+    <div class="hint-arrow">⌁</div>
+
+    <button id="openButton" class="open-button">
+      OPEN INVITATION
+      <span>♥</span>
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     MAIN INVITATION
+========================= -->
+
+<main id="invitation">
+
+
+  <!-- HERO -->
+  <section class="hero section dark-section">
+
+    <div class="corner corner-tl">❧</div>
+    <div class="corner corner-tr">❧</div>
+
+    <div class="floral floral-left">❧</div>
+    <div class="floral floral-right">❧</div>
+
+    <div class="hero-content">
+
+      <p class="eyebrow">TOGETHER WITH THEIR FAMILIES</p>
+
+      <div class="hero-names">
+        Walid & Yasmine
+      </div>
+
+      <div class="hero-line">
+        <span></span>
+        ♥
+        <span></span>
+      </div>
+
+      <p class="hero-invite">
+        INVITE YOU TO CELEBRATE
+      </p>
+
+      <h1>
+        The Beginning<br>
+        Of Their Forever
+      </h1>
+
+      <div class="hero-date">
+        13 · 09 · 2026
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-section section cream-section">
+
+    <div class="paper-flower flower-one">❧</div>
+    <div class="paper-flower flower-two">❧</div>
+
+    <div class="section-content">
+
+      <p class="eyebrow dark-text">COUNTDOWN</p>
+
+      <h2>Until Our Big Day</h2>
+
+      <div class="gold-divider">
+        <span>♥</span>
+      </div>
+
+      <div class="countdown">
+
+        <div class="count-item">
+          <strong id="days">00</strong>
+          <small>DAYS</small>
+        </div>
+
+        <div class="count-item">
+          <strong id="hours">00</strong>
+          <small>HOURS</small>
+        </div>
+
+        <div class="count-item">
+          <strong id="minutes">00</strong>
+          <small>MINUTES</small>
+        </div>
+
+        <div class="count-item">
+          <strong id="seconds">00</strong>
+          <small>SECONDS</small>
         </div>
 
       </div>
 
-      <div class="welcome-content">
+    </div>
 
-        <p class="welcome-names">WALID & YASMINE</p>
+  </section>
 
-        <h1>Welcome to our celebration</h1>
 
-        <p class="welcome-text">
-          Tap to enter and enjoy the music
+  <!-- LOVE STORY / RINGS -->
+  <section id="rings-section" class="story-section section dark-section">
+
+    <div class="story-stars"></div>
+
+    <div class="section-content story-content">
+
+      <div class="story-text">
+
+        <p class="eyebrow">OUR LOVE STORY</p>
+
+        <h2>
+          The Beginning<br>
+          Of Our Story
+        </h2>
+
+        <p>
+          Together is a beautiful<br>
+          place to be.
         </p>
 
-        <button id="enterButton" class="enter-button">
-          ENTER CELEBRATION
+      </div>
+
+
+      <div class="ring-stage">
+
+        <div class="ring ring-one">
+          <span></span>
+        </div>
+
+        <div class="ring ring-two">
+          <span></span>
+        </div>
+
+        <div class="ring-sparkle">✦</div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- DETAILS -->
+  <section class="details-section section cream-section">
+
+    <div class="paper-flower detail-flower-left">❧</div>
+    <div class="paper-flower detail-flower-right">❧</div>
+
+    <div class="section-content">
+
+      <p class="eyebrow dark-text">THE DETAILS</p>
+
+      <h2>A Night To Remember</h2>
+
+      <div class="gold-divider">
+        <span>♥</span>
+      </div>
+
+
+      <div class="details-grid">
+
+        <div class="detail">
+
+          <div class="detail-icon">◷</div>
+
+          <p class="detail-label">TIME</p>
+
+          <h3>7:00 PM</h3>
+
+          <p>Reception & Celebration</p>
+
+        </div>
+
+
+        <div class="detail">
+
+          <div class="detail-icon">▣</div>
+
+          <p class="detail-label">DATE</p>
+
+          <h3>Sunday</h3>
+
+          <p>13 September 2026</p>
+
+        </div>
+
+
+        <div class="detail">
+
+          <div class="detail-icon">⌖</div>
+
+          <p class="detail-label">VENUE</p>
+
+          <h3>Tiba Rose Hotel</h3>
+
+          <p>Egypt</p>
+
+        </div>
+
+      </div>
+
+
+      <a
+        class="location-button"
+        href="https://maps.app.goo.gl/3LwrwyuWPGNcZtKw9?g_st=ac"
+        target="_blank"
+        rel="noopener"
+      >
+        ♧ &nbsp; VIEW LOCATION
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- THE DAY -->
+  <section class="day-section section dark-section">
+
+    <div class="section-content">
+
+      <p class="eyebrow">THE DAY</p>
+
+      <h2>Let's Celebrate<br>Together</h2>
+
+      <div class="schedule">
+
+        <div class="schedule-item">
+
+          <div class="schedule-icon">♧</div>
+
+          <p>CEREMONY</p>
+
+          <strong>7:00 PM</strong>
+
+        </div>
+
+
+        <div class="schedule-item">
+
+          <div class="schedule-icon">♫</div>
+
+          <p>DINNER & DANCING</p>
+
+          <strong>8:00 PM</strong>
+
+        </div>
+
+
+        <div class="schedule-item">
+
+          <div class="schedule-icon">✦</div>
+
+          <p>PARTY ALL NIGHT</p>
+
+          <strong>UNTIL MIDNIGHT</strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MESSAGE -->
+  <section class="message-section section cream-section">
+
+    <div class="section-content">
+
+      <p class="eyebrow dark-text">A MESSAGE FOR US</p>
+
+      <h2>Share Your Wishes</h2>
+
+      <div class="gold-divider">
+        <span>♥</span>
+      </div>
+
+      <p class="message-text">
+        Your love and wishes mean<br>
+        the world to us.
+      </p>
+
+      <div class="message-box">
+
+        <input
+          id="guestName"
+          type="text"
+          placeholder="Your Name"
+        >
+
+        <textarea
+          id="guestMessage"
+          placeholder="Write us a lovely message..."
+        ></textarea>
+
+        <button id="messageButton">
+          SEND MESSAGE ♥
         </button>
 
       </div>
@@ -61,392 +379,56 @@
   </section>
 
 
-  <!-- =========================
-       MAIN INVITATION
-  ========================== -->
+  <!-- FINAL -->
+  <section class="final-section section dark-section">
 
-  <main id="invitation">
+    <div class="floral final-flower-left">❧</div>
+    <div class="floral final-flower-right">❧</div>
 
+    <div class="section-content">
 
-    <!-- HERO -->
-
-    <section class="hero section">
-
-      <div class="hero-glow"></div>
-
-      <div class="jasmine-decoration jasmine-left">✦</div>
-      <div class="jasmine-decoration jasmine-right">✦</div>
-
-      <div class="hero-content">
-
-        <p class="small-title">
-          TOGETHER WITH THEIR FAMILIES
-        </p>
-
-        <div class="monogram">
-          W <span>&</span> Y
-        </div>
-
-        <h1>
-          Walid <span>&</span> Yasmine
-        </h1>
-
-        <p class="hero-subtitle">
-          ARE GETTING MARRIED
-        </p>
-
-        <div class="hero-divider">
-          <span></span>
-          ✦
-          <span></span>
-        </div>
-
-        <p class="hero-date">
-          13 SEPTEMBER 2026
-        </p>
-
-        <p class="hero-time">
-          7:00 PM
-        </p>
-
-      </div>
-
-      <div class="scroll-hint">
-        <span>SCROLL TO DISCOVER</span>
-        <div class="scroll-line"></div>
-      </div>
-
-    </section>
-
-
-    <!-- COUNTDOWN -->
-
-    <section class="countdown-section section">
-
-      <div class="section-inner">
-
-        <p class="eyebrow">
-          THE COUNTDOWN BEGINS
-        </p>
-
-        <h2>
-          Until We Say "I Do"
-        </h2>
-
-        <div class="gold-divider"></div>
-
-        <div class="countdown">
-
-          <div class="count-box">
-            <span id="days">00</span>
-            <small>DAYS</small>
-          </div>
-
-          <div class="count-box">
-            <span id="hours">00</span>
-            <small>HOURS</small>
-          </div>
-
-          <div class="count-box">
-            <span id="minutes">00</span>
-            <small>MINUTES</small>
-          </div>
-
-          <div class="count-box">
-            <span id="seconds">00</span>
-            <small>SECONDS</small>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- RINGS -->
-
-    <section id="rings-section" class="rings-section section">
-
-      <div class="rings-background"></div>
-
-      <div class="ring-stage">
-
-        <div class="wedding-ring ring-left">
-          <div class="ring-inner"></div>
-        </div>
-
-        <div class="wedding-ring ring-right">
-          <div class="ring-inner"></div>
-        </div>
-
-      </div>
-
-      <div class="rings-caption">
-
-        <p class="ring-kicker">
-          TWO SOULS
-        </p>
-
-        <h2>
-          One Beautiful Journey
-        </h2>
-
-        <div class="ring-names">
-          WALID & YASMINE
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- INVITATION MESSAGE -->
-
-    <section class="message-section section">
-
-      <div class="section-inner narrow">
-
-        <p class="eyebrow">
-          WITH LOVE
-        </p>
-
-        <h2>
-          You Are Invited
-        </h2>
-
-        <div class="gold-divider"></div>
-
-        <p class="main-message">
-          With hearts full of love and joy, we invite you
-          to celebrate the beginning of our forever together.
-        </p>
-
-        <p class="main-message">
-          Your presence would make our special evening
-          even more meaningful as we begin this beautiful
-          chapter of our lives.
-        </p>
-
-        <p class="signature">
-          With love,<br>
-          <strong>Walid & Yasmine</strong>
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- EVENT DETAILS -->
-
-    <section class="details-section section">
-
-      <div class="section-inner">
-
-        <p class="eyebrow">
-          SAVE THE DATE
-        </p>
-
-        <h2>
-          Our Special Evening
-        </h2>
-
-        <div class="gold-divider"></div>
-
-        <div class="details-grid">
-
-          <div class="detail-card">
-
-            <div class="detail-icon">
-              ♡
-            </div>
-
-            <span class="detail-label">
-              DATE
-            </span>
-
-            <h3>
-              Sunday
-            </h3>
-
-            <p>
-              13 September 2026
-            </p>
-
-          </div>
-
-
-          <div class="detail-card">
-
-            <div class="detail-icon">
-              ◷
-            </div>
-
-            <span class="detail-label">
-              TIME
-            </span>
-
-            <h3>
-              7:00 PM
-            </h3>
-
-            <p>
-              Reception & Celebration
-            </p>
-
-          </div>
-
-
-          <div class="detail-card">
-
-            <div class="detail-icon">
-              ♧
-            </div>
-
-            <span class="detail-label">
-              DRESS CODE
-            </span>
-
-            <h3>
-              Elegant
-            </h3>
-
-            <p>
-              Come dressed to celebrate
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- VENUE -->
-
-    <section class="venue-section section">
-
-      <div class="venue-overlay"></div>
-
-      <div class="section-inner venue-content">
-
-        <p class="eyebrow">
-          THE VENUE
-        </p>
-
-        <h2>
-          Tiba Rose Hotel
-        </h2>
-
-        <div class="gold-divider"></div>
-
-        <p class="venue-description">
-          We would be delighted to celebrate this
-          unforgettable evening with you at
-          Tiba Rose Hotel.
-        </p>
-
-        <div class="venue-location">
-
-          <span class="location-icon">
-            ✦
-          </span>
-
-          <p>
-            Tiba Rose Hotel
-          </p>
-
-        </div>
-
-        <a
-          href="https://maps.app.goo.gl/3LwrwyuWPGNcZtKw9?g_st=ac"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="maps-button"
-        >
-          OPEN IN GOOGLE MAPS
-        </a>
-
-      </div>
-
-    </section>
-
-
-    <!-- FINAL -->
-
-    <section class="final-section section">
-
-      <div class="final-glow"></div>
-
-      <div class="section-inner">
-
-        <div class="final-monogram">
-          W <span>&</span> Y
-        </div>
-
-        <p class="eyebrow">
-          WE CAN'T WAIT TO CELEBRATE WITH YOU
-        </p>
-
-        <h2>
-          See You There
-        </h2>
-
-        <div class="gold-divider"></div>
-
-        <p class="final-date">
-          13 · 09 · 2026
-        </p>
-
-        <p class="final-names">
-          WALID & YASMINE
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer class="footer">
-
-      <p>
-        Made with love for Walid & Yasmine
+      <p class="eyebrow">
+        WE CAN'T WAIT TO CELEBRATE WITH YOU
       </p>
 
-      <span>
-        2026
-      </span>
+      <div class="final-names">
+        Walid & Yasmine
+      </div>
 
-    </footer>
+      <div class="final-line">
+        <span>→</span>
+        13 · 09 · 2026
+        <span>←</span>
+      </div>
 
-  </main>
+      <div class="final-heart">♥</div>
 
+    </div>
 
-  <!-- MUSIC -->
-
-  <audio id="weddingMusic" loop preload="auto">
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
-
-
-  <!-- MUSIC BUTTON -->
-
-  <button
-    id="musicToggle"
-    class="music-toggle"
-    aria-label="Toggle music"
-  >
-    <span class="music-note">♪</span>
-    <span class="music-text">MUSIC</span>
-  </button>
+  </section>
 
 
-  <script src="script.js"></script>
+  <footer>
+    <p>Made with love for Walid & Yasmine</p>
+    <span>2026</span>
+  </footer>
+
+</main>
+
+
+<!-- MUSIC -->
+
+<audio id="weddingMusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicButton" class="music-button">
+  <span>♫</span>
+  <small>MUSIC</small>
+</button>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
