@@ -1,6 +1,14 @@
+/* =================================
+   WEDDING DATE
+================================= */
+
 const weddingDate =
   new Date("2026-09-13T19:00:00+03:00");
 
+
+/* =================================
+   ELEMENTS
+================================= */
 
 const welcome =
   document.getElementById("welcome");
@@ -8,19 +16,14 @@ const welcome =
 const envelope =
   document.querySelector(".envelope");
 
-const sealButton =
-  document.getElementById("sealButton");
-
-const openButton =
-  document.getElementById("openButton");
-
+const envelopeButton =
+  document.getElementById("envelopeButton");
 
 const music =
   document.getElementById("weddingMusic");
 
 const musicButton =
   document.getElementById("musicButton");
-
 
 const days =
   document.getElementById("days");
@@ -34,12 +37,22 @@ const minutes =
 const seconds =
   document.getElementById("seconds");
 
-
 const ringsSection =
   document.getElementById("rings-section");
 
 
+/* =================================
+   STATE
+================================= */
+
 let invitationOpened = false;
+let ringsAnimated = false;
+
+let autoScrollStarted = false;
+let autoScrollCancelled = false;
+
+let userInteracting = false;
+let interactionTimer = null;
 
 
 /* =================================
@@ -52,10 +65,16 @@ async function openInvitation() {
 
   invitationOpened = true;
 
-
   /* Open envelope */
 
   envelope.classList.add("open");
+
+  envelopeButton.classList.add("opened");
+
+  envelopeButton.setAttribute(
+    "aria-label",
+    "Wedding invitation opened"
+  );
 
 
   /* Start music */
@@ -68,6 +87,11 @@ async function openInvitation() {
 
   } catch (error) {
 
+    /*
+      Browser may block autoplay.
+      The music button remains available.
+    */
+
     console.log(
       "Music autoplay was blocked."
     );
@@ -75,7 +99,10 @@ async function openInvitation() {
   }
 
 
-  /* Hide opening */
+  /*
+    Give the envelope enough time to open
+    before revealing the invitation.
+  */
 
   setTimeout(() => {
 
@@ -83,27 +110,28 @@ async function openInvitation() {
 
     document.body.classList.remove("locked");
 
-  }, 1500);
+  }, 1550);
 
 
-  /* Start slow scroll */
+  /*
+    Start the gentle automatic journey
+    after the opening transition.
+  */
 
   setTimeout(() => {
 
     startAutoScroll();
 
-  }, 3500);
+  }, 3000);
 
 }
 
 
-sealButton.addEventListener(
-  "click",
-  openInvitation
-);
+/* =================================
+   ENVELOPE CLICK
+================================= */
 
-
-openButton.addEventListener(
+envelopeButton.addEventListener(
   "click",
   openInvitation
 );
@@ -226,9 +254,6 @@ setInterval(
    RINGS ANIMATION
 ================================= */
 
-let ringsAnimated = false;
-
-
 const ringsObserver =
   new IntersectionObserver(
 
@@ -270,19 +295,22 @@ ringsObserver.observe(
 
 
 /* =================================
-   AUTO SCROLL
+   USER INTERACTION
 ================================= */
-
-let autoScrollStarted = false;
-
-let userInteracting = false;
-
-let interactionTimer;
-
 
 function pauseAutoScroll() {
 
+  if (!invitationOpened) return;
+
   userInteracting = true;
+
+  /*
+    Once the visitor manually scrolls,
+    the automatic journey is cancelled.
+    The visitor remains fully in control.
+  */
+
+  autoScrollCancelled = true;
 
   clearTimeout(
     interactionTimer
@@ -294,40 +322,79 @@ function pauseAutoScroll() {
 
       userInteracting = false;
 
-    }, 7000);
+    }, 1500);
 
 }
 
 
 window.addEventListener(
-  "touchstart",
+  "wheel",
   pauseAutoScroll,
-  { passive: true }
+  {
+    passive: true
+  }
 );
 
 
 window.addEventListener(
-  "wheel",
+  "touchstart",
   pauseAutoScroll,
-  { passive: true }
+  {
+    passive: true
+  }
 );
 
 
 window.addEventListener(
   "pointerdown",
   pauseAutoScroll,
-  { passive: true }
+  {
+    passive: true
+  }
 );
 
+
+window.addEventListener(
+  "keydown",
+  (event) => {
+
+    const keys = [
+      "ArrowDown",
+      "ArrowUp",
+      "PageDown",
+      "PageUp",
+      " ",
+      "Home",
+      "End"
+    ];
+
+    if (keys.includes(event.key)) {
+
+      pauseAutoScroll();
+
+    }
+
+  }
+);
+
+
+/* =================================
+   WAIT
+================================= */
 
 function wait(ms) {
 
   return new Promise(
-    resolve => setTimeout(resolve, ms)
+    resolve =>
+      setTimeout(resolve, ms)
   );
 
 }
 
+
+/* =================================
+   AUTO SCROLL
+================================= */
 
 async function startAutoScroll() {
 
@@ -335,27 +402,50 @@ async function startAutoScroll() {
 
   autoScrollStarted = true;
 
+  /*
+    Let the user see the hero first.
+  */
 
   await wait(2500);
 
 
+  if (
+    autoScrollCancelled ||
+    userInteracting
+  ) {
+    return;
+  }
+
+
   const sections =
-    document.querySelectorAll(
-      "#invitation > .section"
+    Array.from(
+      document.querySelectorAll(
+        "#invitation > .section"
+      )
     );
 
 
+  /*
+    Start from the second section
+    because the hero is already visible.
+  */
+
   for (
-    const section of sections
+    let index = 1;
+    index < sections.length;
+    index++
   ) {
 
-    if (userInteracting) {
-
-      await wait(2000);
-
-      continue;
-
+    if (
+      autoScrollCancelled ||
+      userInteracting
+    ) {
+      return;
     }
+
+
+    const section =
+      sections[index];
 
 
     section.scrollIntoView({
@@ -367,18 +457,29 @@ async function startAutoScroll() {
     });
 
 
-    /* Longer pause at rings */
+    /*
+      Rings get extra time so the
+      animation can be appreciated.
+    */
 
     if (
       section.id === "rings-section"
     ) {
 
-      await wait(7500);
+      await wait(7000);
 
     } else {
 
       await wait(4500);
 
+    }
+
+
+    if (
+      autoScrollCancelled ||
+      userInteracting
+    ) {
+      return;
     }
 
   }
