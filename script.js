@@ -65,6 +65,7 @@ async function openInvitation() {
 
   invitationOpened = true;
 
+
   /* Open envelope */
 
   envelope.classList.add("open");
@@ -87,11 +88,6 @@ async function openInvitation() {
 
   } catch (error) {
 
-    /*
-      Browser may block autoplay.
-      The music button remains available.
-    */
-
     console.log(
       "Music autoplay was blocked."
     );
@@ -100,8 +96,8 @@ async function openInvitation() {
 
 
   /*
-    Give the envelope enough time to open
-    before revealing the invitation.
+    Let the envelope animation finish
+    before removing the opening screen.
   */
 
   setTimeout(() => {
@@ -110,12 +106,21 @@ async function openInvitation() {
 
     document.body.classList.remove("locked");
 
+    /*
+      Make sure the invitation starts
+      exactly from the Hero section.
+    */
+
+    window.scrollTo({
+      top: 0,
+      behavior: "instant"
+    });
+
   }, 1550);
 
 
   /*
-    Start the gentle automatic journey
-    after the opening transition.
+    Start the gentle automatic journey.
   */
 
   setTimeout(() => {
@@ -202,7 +207,9 @@ function updateCountdown() {
 
 
   const totalSeconds =
-    Math.floor(difference / 1000);
+    Math.floor(
+      difference / 1000
+    );
 
 
   const d =
@@ -304,12 +311,6 @@ function pauseAutoScroll() {
 
   userInteracting = true;
 
-  /*
-    Once the visitor manually scrolls,
-    the automatic journey is cancelled.
-    The visitor remains fully in control.
-  */
-
   autoScrollCancelled = true;
 
   clearTimeout(
@@ -402,8 +403,9 @@ async function startAutoScroll() {
 
   autoScrollStarted = true;
 
+
   /*
-    Let the user see the hero first.
+    Let the visitor enjoy the Hero.
   */
 
   await wait(2500);
@@ -427,7 +429,7 @@ async function startAutoScroll() {
 
   /*
     Start from the second section
-    because the hero is already visible.
+    because the Hero is already visible.
   */
 
   for (
@@ -458,8 +460,7 @@ async function startAutoScroll() {
 
 
     /*
-      Rings get extra time so the
-      animation can be appreciated.
+      Give the rings extra time.
     */
 
     if (
